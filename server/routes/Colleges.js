@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const axios = require("axios");
 const express = require("express");
-const { json } = require("sequelize");
 const { Colleges } = require("../models");
 const { getTranslation } = require("../services/Translation");
 

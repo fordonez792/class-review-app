@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const { Courses, Departments, Colleges, Sequelize } = require("../models");
+const { Courses, Departments, Sequelize } = require("../models");
 const { detectIntent } = require("../services/Chatbot");
 
 const router = express.Router();

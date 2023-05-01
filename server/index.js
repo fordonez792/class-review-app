@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
@@ -35,8 +37,11 @@ app.use("/departments", departmentsRouter);
 const coursesRouter = require("./routes/Courses");
 app.use("/courses", coursesRouter);
 
-db.sequelize.sync().then(() => {
-  server.listen("3001", () => {
-    console.log("server running");
-  });
-});
+db.sequelize
+  .sync()
+  .then(() => {
+    server.listen(process.env.PORT || 3001, () => {
+      console.log("server running");
+    });
+  })
+  .catch((error) => console.log(error));
