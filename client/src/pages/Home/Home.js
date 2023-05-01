@@ -1,0 +1,205 @@
+import React, { useState, useEffect } from "react";
+import {
+  FaSearch,
+  FaChevronCircleLeft,
+  FaChevronCircleRight,
+} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
+import SingleCourse from "../../components/SingleCourse";
+import SingleReview from "../../components/SingleReview";
+import Footer from "../../components/Footer";
+import ChatbotDesktop from "../Chatbot/ChatbotDesktop";
+import Loading from "../../components/Loading";
+
+import homePic from "../../assets/home_pic.jpg";
+import { images } from "../../assets/images";
+import { homeTranslations } from "./homeTranslations";
+import { useLanguageContext } from "../../context/LanguageContext";
+import { useSearchContext } from "../../context/SearchContext";
+import { getMostRecentReviews } from "../../api/reviewsApi";
+import { getPopularCourses } from "../../api/coursesApi";
+
+const Home = () => {
+  const { setIsSearchOpen, isSearchOpen } = useSearchContext();
+  const { language } = useLanguageContext();
+
+  const navigate = useNavigate();
+
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
+  const [position, setPosition] = useState(1);
+
+  const popular = useQuery(["popularCourses"], () => getPopularCourses());
+  const reviews = useQuery(["reviews"], () => getMostRecentReviews());
+
+  const handleScroll = (e) => {
+    if (e.target.classList.contains("left-btn")) {
+      if (position - 1 < 1) setPosition(5);
+      if (position - 1 >= 1) setPosition(position - 1);
+    }
+    if (e.target.classList.contains("right-btn")) {
+      if (position + 1 > 5) setPosition(1);
+      if (position + 1 <= 5) setPosition(position + 1);
+    }
+  };
+
+  const updateState = () => {
+    setIsDesktop(window.innerWidth > 1199);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateState);
+    return () => window.removeEventListener("resize", updateState);
+  });
+
+  return (
+    <section id="home" className="page">
+      <div className="container">
+        <article className="picture">
+          <img src={images[0].source} alt="image" />
+          <p className={language === "Chinese" ? "chinese" : null}>
+            {language === "English"
+              ? homeTranslations[0].english
+              : language === "Chinese" && homeTranslations[0].chinese}
+          </p>
+          <form className="searchbar" onClick={() => setIsSearchOpen(true)}>
+            <label>
+              <FaSearch />
+            </label>
+            <input
+              name="search"
+              type="text"
+              placeholder={
+                language === "English"
+                  ? homeTranslations[1].english
+                  : language === "Chinese" && homeTranslations[1].chinese
+              }
+              autoComplete="off"
+              onClick={() => window.scrollTo({ top: 351, behavior: "smooth" })}
+            />
+          </form>
+        </article>
+        <article className="recent-reviews">
+          <div className="header">
+            <h1>
+              {language === "English"
+                ? homeTranslations[2].english
+                : language === "Chinese" && homeTranslations[2].chinese}
+            </h1>
+          </div>
+          {reviews.status === "loading" && <Loading />}
+          {reviews.status === "success" && (
+            <div className="recent-container">
+              <div className="left-btn" onClick={(e) => handleScroll(e)}>
+                <FaChevronCircleLeft />
+              </div>
+              {Array.from(reviews?.data).map((review, index) => {
+                return (
+                  <SingleReview
+                    key={index}
+                    review={review}
+                    position={position}
+                    index={index + 1}
+                    refetch={reviews.refetch}
+                  />
+                );
+              })}
+              <div className="right-btn" onClick={(e) => handleScroll(e)}>
+                <FaChevronCircleRight />
+              </div>
+            </div>
+          )}
+        </article>
+        <article className="popular">
+          <div className="header">
+            <h1>
+              {language === "English"
+                ? homeTranslations[3].english
+                : language === "Chinese" && homeTranslations[3].chinese}
+            </h1>
+          </div>
+          <ul className="popular-courses">
+            {popular.status === "error" &&
+              (language === "English"
+                ? homeTranslations[4].english
+                : language === "Chinese" && homeTranslations[4].chinese)}
+            {popular.status === "loading" && <Loading />}
+            {popular.status === "success" &&
+              Array.from(popular.data).map((course, index) => {
+                const {
+                  courseId,
+                  courseEnglishName,
+                  courseName,
+                  overallRecommend,
+                  numberOfReviews,
+                  teacher,
+                  Department,
+                } = course;
+                const { departmentEnglishName, departmentName } = Department;
+                if (!isDesktop) {
+                  return (
+                    <li
+                      key={index}
+                      onClick={() =>
+                        navigate(`/course/${courseId}`, {
+                          state: { navigate: true },
+                        })
+                      }
+                    >
+                      <span>
+                        {language === "English"
+                          ? courseEnglishName
+                          : language === "Chinese" && courseName}{" "}
+                        - {courseId}
+                      </span>
+                      <span>
+                        {language === "English"
+                          ? departmentEnglishName
+                          : language === "Chinese" && departmentName}
+                      </span>
+                    </li>
+                  );
+                } else {
+                  return (
+                    <SingleCourse
+                      key={index}
+                      courseId={courseId}
+                      courseName={courseName}
+                      courseEnglishName={courseEnglishName}
+                      overallRecommend={overallRecommend}
+                      numberOfReviews={numberOfReviews}
+                      teacher={teacher}
+                    />
+                  );
+                }
+              })}
+          </ul>
+        </article>
+        <article className="write-a-review">
+          <div className="header">
+            <h1>
+              {language === "English"
+                ? homeTranslations[5].english
+                : language === "Chinese" && homeTranslations[5].chinese}
+            </h1>
+          </div>
+          <div className="picture">
+            <img src={homePic} alt="" />
+          </div>
+          <div className="paragraph">
+            <p>
+              {language === "English"
+                ? homeTranslations[6].english
+                : language === "Chinese" && homeTranslations[6].chinese}
+            </p>
+          </div>
+        </article>
+        {isDesktop && <ChatbotDesktop isDesktop={isDesktop} />}
+      </div>
+      <Footer />
+    </section>
+  );
+};
+
+export default Home;
