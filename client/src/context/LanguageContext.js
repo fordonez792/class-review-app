@@ -3,7 +3,9 @@ import React, { useState, useContext, useEffect } from "react";
 export const LanguageContext = React.createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState(localStorage.getItem("language"));
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "English | 英文"
+  );
 
   const chooseLanguage = (e) => {
     localStorage.setItem("language", e.target.textContent.split(" ")[0]);
