@@ -1611,10 +1611,10 @@ button:hover {
     background-color: transparent;
   }
   #side-menu.side-menu2 {
-    height: 690px;
+    height: 650px;
     width: auto;
     max-width: 400px;
-    max-height: 690px;
+    max-height: 650px;
     top: 10%;
     left: 45%;
     transition: 0s ease opacity;
@@ -1648,8 +1648,8 @@ button:hover {
     left: 0;
     right: 0;
     top: 0;
-    height: 690px !important;
-    max-height: 690px !important;
+    height: 650px !important;
+    max-height: 650px !important;
     overflow-y: scroll;
     background-color: var(--white);
     border-left: 3px solid var(--navy);
@@ -1671,6 +1671,7 @@ button:hover {
     height: auto !important;
     line-height: 25px !important;
     padding: 10px 1.5rem !important;
+    font-size: 1rem;
   }
   #side-menu .options li svg {
     font-size: 1.2rem;
