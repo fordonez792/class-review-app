@@ -4,7 +4,7 @@ export const LanguageContext = React.createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(
-    localStorage.getItem("language") || "English | 英文"
+    localStorage.getItem("language") || "English"
   );
 
   const chooseLanguage = (e) => {
@@ -14,7 +14,7 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     if (!localStorage.getItem("language")) {
-      setLanguage("English | 英文");
+      setLanguage("English");
       localStorage.setItem("language", "English");
     }
   }, []);
