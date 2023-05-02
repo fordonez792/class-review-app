@@ -48,9 +48,9 @@ const Navbar = () => {
   const openAccountMenu = () => {
     if (!accountMenuRef.current) return;
     if (!accountMenuRef.current?.classList?.contains("active")) {
-      accountMenuRef.current.classList?.add("active");
+      accountMenuRef.current?.classList?.add("active");
     } else {
-      accountMenuRef.current.classList?.remove("active");
+      accountMenuRef.current?.classList?.remove("active");
     }
   };
 
@@ -63,7 +63,7 @@ const Navbar = () => {
     )
       return;
     else {
-      accountMenuRef?.current?.classList?.remove("active");
+      accountMenuRef.current?.classList?.remove("active");
     }
   };
 
@@ -84,13 +84,17 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    if (!searchbarRef.current) return;
     !isDesktop && document.addEventListener("click", closeAccountMenu);
     location.pathname === "/" &&
+      searchbarRef.current &&
       document.addEventListener("scroll", activateSearchbar);
 
     return () => {
+      if (!searchbarRef.current) return;
       !isDesktop && document.removeEventListener("click", closeAccountMenu);
       location.pathname === "/" &&
+        searchbarRef.current &&
         document.removeEventListener("scroll", activateSearchbar);
     };
   }, [location.pathname]);
@@ -98,10 +102,12 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/write-review")
       return;
+    if (!searchbarRef.current) return;
     searchbarRef.current?.classList?.add("active");
   }, []);
 
   useEffect(() => {
+    if (!searchbarRef.current) return;
     if (isSearchOpen) searchbarRef.current.children[1].focus();
   }, [isSearchOpen]);
 

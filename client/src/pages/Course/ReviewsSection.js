@@ -23,6 +23,7 @@ const ReviewsSection = ({
   setIsFilterOpen,
   selectedFilters,
   setSelectedFilters,
+  isTablet,
   isDesktop,
 }) => {
   const { language } = useLanguageContext();
@@ -99,21 +100,25 @@ const ReviewsSection = ({
           </div>
           <button className="sort" onClick={() => setIsSortOpen(true)}>
             <TbArrowsSort />{" "}
-            <span>
-              {language === "English"
-                ? reviewsSectionTranslations[2].english
-                : language === "Chinese" &&
-                  reviewsSectionTranslations[2].chinese}
-            </span>
+            {isTablet && (
+              <span>
+                {language === "English"
+                  ? reviewsSectionTranslations[2].english
+                  : language === "Chinese" &&
+                    reviewsSectionTranslations[2].chinese}
+              </span>
+            )}
           </button>
           <button className="filter" onClick={() => setIsFilterOpen(true)}>
             <FaSlidersH />{" "}
-            <span>
-              {language === "English"
-                ? reviewsSectionTranslations[3].english
-                : language === "Chinese" &&
-                  reviewsSectionTranslations[3].chinese}
-            </span>
+            {isTablet && (
+              <span>
+                {language === "English"
+                  ? reviewsSectionTranslations[3].english
+                  : language === "Chinese" &&
+                    reviewsSectionTranslations[3].chinese}
+              </span>
+            )}
           </button>
           {isDesktop && (
             <>

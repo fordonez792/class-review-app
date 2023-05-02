@@ -21,6 +21,8 @@ const SingleCourse = ({
   const { language } = useLanguageContext();
   const navigate = useNavigate();
 
+  console.log(time);
+
   return (
     <article id="single-course" className={className}>
       <div className="header">

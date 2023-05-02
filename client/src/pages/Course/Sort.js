@@ -27,7 +27,7 @@ const Sort = ({
 
   const closeSort = () => {
     if (!selectedSort.saved) {
-      setSelectedSort({ ...selectedSort, sort: null });
+      setSelectedSort({ ...selectedSort });
     }
     setIsSortOpen(false);
   };

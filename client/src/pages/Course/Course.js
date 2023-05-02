@@ -25,9 +25,11 @@ const Course = () => {
   const [search, setSearch] = useState("");
   const debouncedValue = useDebounce(search, 1000);
 
+  const [isTablet, setIsTablet] = useState(window.innerWidth > 767);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
 
   const updateState = () => {
+    setIsTablet(window.innerWidth > 767);
     setIsDesktop(window.innerWidth > 1199);
   };
 
@@ -125,6 +127,7 @@ const Course = () => {
                   overallEngaging={course?.data.overallEngaging}
                   overallFairAssessments={course?.data.overallFairAssessments}
                   overallRecommend={course?.data.overallRecommend}
+                  isDesktop={isDesktop}
                 />
                 <CourseInfoSection
                   courseId={course?.data.courseId}
@@ -152,6 +155,7 @@ const Course = () => {
                     setIsFilterOpen={setIsFilterOpen}
                     selectedFilters={selectedFilters}
                     setSelectedFilters={setSelectedFilters}
+                    isTablet={isTablet}
                     isDesktop={isDesktop}
                   />
                   {isDesktop && (

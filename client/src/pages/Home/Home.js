@@ -27,6 +27,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  const [isTablet, setIsTablet] = useState(window.innerWidth > 767);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
   const [position, setPosition] = useState(1);
 
@@ -45,6 +46,7 @@ const Home = () => {
   };
 
   const updateState = () => {
+    setIsTablet(window.innerWidth > 767);
     setIsDesktop(window.innerWidth > 1199);
   };
 
@@ -102,6 +104,7 @@ const Home = () => {
                     position={position}
                     index={index + 1}
                     refetch={reviews.refetch}
+                    isTablet={isTablet}
                   />
                 );
               })}
@@ -134,6 +137,7 @@ const Home = () => {
                   overallRecommend,
                   numberOfReviews,
                   teacher,
+                  time,
                   Department,
                 } = course;
                 const { departmentEnglishName, departmentName } = Department;
@@ -170,6 +174,7 @@ const Home = () => {
                       overallRecommend={overallRecommend}
                       numberOfReviews={numberOfReviews}
                       teacher={teacher}
+                      time={time}
                     />
                   );
                 }

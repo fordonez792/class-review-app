@@ -34,13 +34,17 @@ const Ratings = ({ ratings, setRatings }) => {
   useEffect(() => {
     // on mount the previous ratings inputted will be preserved and shown
     Array.from(criteriaRef.current.children).forEach((child, index) => {
-      if (child.id === ratings[index].name) {
+      if (child.id === ratings[index].name.english) {
         const stars = child.children[1];
         // const p = child.lastChild;
         Array.from(stars.children).forEach((star) => {
+          console.log(
+            star.id,
+            `${ratings[index].name.english}-star-${ratings[index].selection}`
+          );
           if (
             star.id ===
-            `${ratings[index].name}-star-${ratings[index].selection}`
+            `${ratings[index].name.english}-star-${ratings[index].selection}`
           ) {
             star.checked = true;
           }

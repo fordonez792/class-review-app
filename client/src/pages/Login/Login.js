@@ -183,13 +183,13 @@ const Login = () => {
                 {viewPassword ? <FaRegEyeSlash /> : <FaRegEye />}
               </div>
             </div>
-            <div className="forgot-password">
+            {/* <div className="forgot-password">
               <h2>
                 {language === "English"
                   ? loginTranslations[3].english
                   : language === "Chinese" && loginTranslations[3].chinese}
               </h2>
-            </div>
+            </div> */}
             <button type="submit" onSubmit={(e) => handleSubmit(e)}>
               {language === "English"
                 ? loginTranslations[0].english

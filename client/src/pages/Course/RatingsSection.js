@@ -17,6 +17,7 @@ const RatingsSection = ({
   overallFairAssessments,
   overallRecommend,
   numberOfReviews,
+  isDesktop = { isDesktop },
 }) => {
   const { language } = useLanguageContext();
   const ratingsRef = useRef();
@@ -31,6 +32,7 @@ const RatingsSection = ({
   };
 
   const displayDefinition = (e) => {
+    if (!isDesktop) return;
     const definition = criteriaRef.current.children[4];
     if (e.target.classList.contains("difficulty")) {
       if (language === "English") {
@@ -67,6 +69,7 @@ const RatingsSection = ({
   };
 
   const resetDefinition = () => {
+    if (!isDesktop) return;
     const definition = criteriaRef.current.children[4];
     definition.textContent = "";
     definition.classList.remove("difficulty");

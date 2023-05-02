@@ -223,14 +223,18 @@ const Chatbot = ({ isDesktop, setIsChatbotOpen }) => {
   // useEffect will prevent empty messages from being sent, styling appropriately once there is at least 1 character in the input box
   useEffect(() => {
     if (message === "") {
-      resizeRef.current.style.width = "94%";
+      if (isDesktop) {
+        resizeRef.current.style.width = "calc(98% - 20px)";
+      } else {
+        resizeRef.current.style.width = "calc(90% - 20px)";
+      }
       buttonRef.current.style.opacity = "0";
       buttonRef.current.style.pointerEvents = "none";
     } else {
       if (isDesktop) {
         resizeRef.current.style.width = "calc(86% - 20px)";
       } else {
-        resizeRef.current.style.width = "calc(80% - 20px)";
+        resizeRef.current.style.width = "calc(78% - 20px)";
       }
       buttonRef.current.style.opacity = "1";
       buttonRef.current.style.pointerEvents = "all";

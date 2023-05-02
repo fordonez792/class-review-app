@@ -56,7 +56,7 @@ body {
   text-align: center;
 }
 .header h1 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-family: "Ubuntu", sans-serif;
   margin: 0;
   text-transform: capitalize;
@@ -725,6 +725,7 @@ button:hover {
   width: 90%;
   justify-content: space-around;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
 }
 #signup .create-account {
   flex: 70%;
@@ -736,9 +737,10 @@ button:hover {
 }
 #signup .create-account .header {
   margin-top: 20px;
+  margin-bottom: 0;
 }
 #signup .form-container {
-  margin-top: 10;
+  margin-top: 5px;
 }
 #signup .create-account button {
   margin-bottom: 30px;
@@ -754,9 +756,9 @@ button:hover {
   color: var(--white);
 }
 #signup .welcome-back p {
-  width: 80%;
+  width: 95%;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 #signup .welcome-back .header {
   margin-bottom: 0;
@@ -764,6 +766,7 @@ button:hover {
 }
 #signup .welcome-back .header h1 {
   color: var(--white);
+  font-size: 1.2rem;
 }
 #signup .welcome-back button {
   border-color: var(--white);
@@ -802,6 +805,7 @@ button:hover {
   width: 90%;
   justify-content: flex-start;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
 }
 #login .login-container {
   flex: 65%;
@@ -812,7 +816,7 @@ button:hover {
   width: 100%;
 }
 #login .login-container .header {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 #login .forgot-password {
   display: flex;
@@ -855,9 +859,9 @@ button:hover {
   color: var(--white);
 }
 #login .new-here p {
-  width: 80%;
+  width: 95%;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 #login .new-here .header {
   margin-bottom: 0;
@@ -865,6 +869,7 @@ button:hover {
 }
 #login .new-here .header h1 {
   color: var(--white);
+  font-size: 1.2rem;
 }
 #login .new-here button {
   border-color: var(--white);
@@ -911,20 +916,20 @@ button:hover {
 }
 #navbar .navbar .side-menu {
   height: 100%;
-  margin-left: 2rem;
+  margin-left: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 #navbar .navbar svg {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   color: var(--white);
 }
 #navbar .navbar .logo {
   margin: 0 15px;
-  margin-left: 50px;
+  margin-left: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -932,12 +937,12 @@ button:hover {
   cursor: pointer;
 }
 #navbar .navbar .logo img {
-  width: 210px;
+  width: 190px;
   object-fit: fill;
 }
 #navbar .navbar .btn-container {
   display: flex;
-  margin-right: 2rem;
+  margin-right: 1rem;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
@@ -1022,6 +1027,9 @@ button:hover {
   }
   #navbar .navbar .left .side-menu {
     margin-left: 2rem;
+  }
+  #navbar .navbar .logo {
+    margin-left: 50px !important;
   }
   #navbar .navbar .right {
     list-style: none;
@@ -1212,10 +1220,10 @@ button:hover {
   pointer-events: none;
 }
 #footer .language .field-container {
-  width: fit-content;
+  width: 90%;
 }
 #footer .language .field-container .input-field {
-  width: 350px;
+  width: calc(90% - 20px);
 }
 #footer .language .field-container .dropdown-menu {
   border-radius: 3px;
@@ -1261,6 +1269,12 @@ button:hover {
   }
   #footer .language .icon {
     font-size: 1.1rem;
+  }
+  #footer .language .field-container {
+    width: fit-content;
+  }
+  #footer .language .field-container .input-field {
+    width: 350px;
   }
 }
 /* Desktop */
@@ -1357,6 +1371,7 @@ button:hover {
 }
 #search .container .results .search-results li:first-child span {
   font-size: 1rem !important;
+  text-align: center;
 }
 #search .container .popular .popular-courses li:hover span:first-child,
 #search .container .results .search-results li:hover span:first-child {
@@ -1485,19 +1500,19 @@ button:hover {
 }
 #side-menu .go-back {
   position: absolute;
-  left: 1.5rem;
-  top: 1.5rem;
+  left: 1.4rem;
+  top: 1.4rem;
 }
 #side-menu .close-btn {
   position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
+  right: 1.4rem;
+  top: 1.4rem;
 }
 #side-menu .go-back svg,
 #side-menu .close-btn svg {
   height: 100%;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: 0.3s ease color, 0.5s ease transform;
 }
@@ -1507,13 +1522,14 @@ button:hover {
 }
 #side-menu .header {
   margin: 1rem 0;
-  width: 395px;
+  margin-bottom: 15px;
+  width: 70%;
 }
 #side-menu .options {
   margin: 0;
   padding: 0;
-  margin-top: 20px;
   width: 100%;
+  height: 100%;
 }
 #side-menu.side-menu2 .options {
   overflow-y: scroll;
@@ -1526,12 +1542,17 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  min-height: 40px;
+  min-height: 30px;
+  height: calc((100% / 11) - 20px);
   line-height: 25px;
   text-align: start;
-  padding: 10px 1.5rem;
+  padding: 10px 1rem;
   cursor: pointer;
   transition: 0.3s ease background-color;
+}
+#side-menu.side-menu2 .options li {
+  min-height: 40px;
+  height: auto;
 }
 #side-menu .options li:hover {
   background-color: var(--light-gray);
@@ -1541,6 +1562,7 @@ button:hover {
 }
 #side-menu .options li svg {
   font-size: 1.2rem;
+  margin-left: 1rem;
   pointer-events: none;
 }
 
@@ -1570,6 +1592,16 @@ button:hover {
   #side-menu .close-btn svg {
     font-size: calc(1.5rem * 1.1);
   }
+  #side-menu .options {
+    margin-top: 10px;
+  }
+  #side-menu .options li {
+    padding: 10px 1.5rem !important;
+    font-size: 1.2rem;
+  }
+  #side-menu .options li svg {
+    font-size: 1.5rem;
+  }
 }
 /* Desktop */
 @media only screen and (min-width: 1200px) {
@@ -1579,10 +1611,10 @@ button:hover {
     background-color: transparent;
   }
   #side-menu.side-menu2 {
-    height: 610px;
+    height: 690px;
     width: auto;
     max-width: 400px;
-    max-height: 610px;
+    max-height: 690px;
     top: 10%;
     left: 45%;
     transition: 0s ease opacity;
@@ -1616,8 +1648,8 @@ button:hover {
     left: 0;
     right: 0;
     top: 0;
-    height: 610px;
-    max-height: 610px;
+    height: 690px !important;
+    max-height: 690px !important;
     overflow-y: scroll;
     background-color: var(--white);
     border-left: 3px solid var(--navy);
@@ -1635,9 +1667,10 @@ button:hover {
     margin-top: 0;
   }
   #side-menu .options li {
-    min-height: 30px;
-    line-height: 25px;
-    padding: 10px 1.5rem;
+    min-height: 30px !important;
+    height: auto !important;
+    line-height: 25px !important;
+    padding: 10px 1.5rem !important;
   }
   #side-menu .options li svg {
     font-size: 1.2rem;
@@ -1653,6 +1686,7 @@ button:hover {
   top: 10%;
   left: 0;
   right: 0;
+  overflow: hidden;
 }
 #search-results .container {
   position: relative;
@@ -1789,8 +1823,9 @@ button:hover {
   align-items: center;
   justify-content: center;
   padding: 0;
-  height: 52px;
+  height: 47px;
   min-width: 80%;
+  max-width: 97%;
   border-radius: 30px;
   list-style: none;
   background-color: var(--white);
@@ -1801,8 +1836,8 @@ button:hover {
   justify-content: center;
   align-items: center;
   padding-left: 2px;
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   margin: 2px;
   border-radius: 50%;
   color: var(--dark-blue);
@@ -1994,7 +2029,7 @@ button:hover {
   margin-bottom: 30px;
 }
 #single-course .header {
-  width: 400px;
+  width: 97%;
 }
 #single-course .header h1 {
   margin-top: 10px;
@@ -2147,7 +2182,7 @@ button:hover {
   transform: scale(1.1);
 }
 #filter-modal .header {
-  margin: 12px 0;
+  margin: 10px 0;
   width: 395px;
 }
 #filter-modal .single-filter {
@@ -2160,7 +2195,7 @@ button:hover {
   margin-left: 20px;
 }
 #filter-modal .single-filter .header h1 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 #filter-modal .single-filter ul {
   list-style: none;
@@ -2177,8 +2212,9 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px;
-  padding: 12px;
+  margin: 3px;
+  padding: 10px;
+  font-size: 0.9rem;
   border-radius: 50px;
   border: 2px solid var(--dark-blue);
   color: var(--dark-blue);
@@ -2230,6 +2266,14 @@ button:hover {
   }
   #filter-modal .single-filter ul li {
     font-size: 1.1rem;
+  }
+  #filter-modal .single-filter ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 12px;
+    font-size: 1rem;
   }
   #filter-modal .btn-container {
     margin-bottom: 50px;
@@ -2668,13 +2712,13 @@ button:hover {
   color: var(--green);
 }
 #write-review .review-search .searchbar {
-  width: 400px;
+  width: 320px;
   top: 0;
   left: 50%;
   transform: translate(-50%);
 }
 #write-review .review-search .searchbar input {
-  width: 290px;
+  width: 210px;
 }
 #write-review .review-search .results {
   position: relative;
@@ -2706,6 +2750,9 @@ button:hover {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+}
+#write-review .results .search-results li:first-child svg {
+  margin-right: 1rem;
 }
 #write-review .results .search-results li:first-child span:last-child {
   color: var(--navy);
@@ -2926,6 +2973,9 @@ button:hover {
   justify-content: space-evenly;
   align-items: center;
 }
+#write-review .btn-container button {
+  width: 125px;
+}
 #write-review .btn-container button.hide {
   display: none;
 }
@@ -2973,6 +3023,9 @@ button:hover {
   .toggler-wrapper .toggler-knob {
     width: calc((20px - 6px) * 1.1);
     height: calc((20px - 6px) * 1.1);
+  }
+  #write-review .btn-container button {
+    width: 150px;
   }
 }
 /* Desktop */
@@ -3043,9 +3096,9 @@ button:hover {
 /* Criteria Modal */
 #criteria-modal {
   position: absolute;
-  top: 0;
-  left: 5%;
-  right: 5%;
+  top: -7%;
+  left: 2%;
+  right: 2%;
   border-radius: 10px;
   opacity: 0;
   pointer-events: none;
@@ -3123,6 +3176,7 @@ button:hover {
 /* Tablet */
 @media only screen and (min-width: 768px) {
   #criteria-modal {
+    top: 0;
     left: 10%;
     right: 10%;
   }
@@ -3177,6 +3231,7 @@ button:hover {
   left: 0;
   right: 0;
   background-color: var(--light-gray);
+  overflow: hidden;
 }
 #course .container {
   min-height: 90vh !important;
@@ -3309,7 +3364,7 @@ button:hover {
   width: 100%;
 }
 #course .ratings .contain {
-  width: 90%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3373,7 +3428,7 @@ button:hover {
 #course .ratings .criteria {
   position: relative;
   margin: 1rem;
-  margin-left: 2.5rem;
+  margin-left: 1rem;
   margin-right: 0;
   width: 100%;
 }
@@ -3478,7 +3533,7 @@ button:hover {
 #course .reviews-container .desktop-white .filter {
   all: unset;
   margin: 10px 5px;
-  min-width: 90px;
+  min-width: 40px;
   min-height: 20px;
   padding: 10px;
   display: flex;
@@ -3534,7 +3589,7 @@ button:hover {
 }
 #course .reviews-container .desktop-white .searchbar.active {
   border-width: 1px;
-  width: 220px;
+  width: 200px;
   pointer-events: all;
 }
 #course .reviews-container .desktop-white .searchbar svg {
@@ -3626,6 +3681,9 @@ button:hover {
   #course .course-info .info li {
     font-size: 1.1rem;
   }
+  #course .ratings .contain {
+    width: 90%;
+  }
   #course .ratings {
     background-color: var(--white);
     width: 100%;
@@ -3656,18 +3714,18 @@ button:hover {
   #course .reviews-container .search,
   #course .reviews-container .sort,
   #course .reviews-container .filter {
-    min-width: 110px;
+    min-width: 110px !important;
     height: 20px;
     font-size: 1.1rem;
   }
   #course .reviews-container .search {
-    min-width: 0;
+    min-width: 0 !important;
   }
   #course .reviews-container .searchbar {
     height: 40px;
   }
   #course .reviews-container .searchbar.active {
-    width: 250px;
+    width: 250px !important;
   }
   #course .no-reviews {
     padding-bottom: 30px;
@@ -3813,6 +3871,7 @@ button:hover {
   width: 50px;
   height: 50px;
   margin: 20px;
+  margin-right: 10px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -3833,6 +3892,7 @@ button:hover {
 }
 #single-review .user-info .user p {
   margin: 0;
+  font-size: 0.7rem;
 }
 #single-review .user-info .options {
   display: flex;
@@ -4010,6 +4070,7 @@ button:hover {
   #single-review .user-info .photo {
     width: 60px;
     height: 60px;
+    margin: 20px;
   }
   #single-review .user-info .user {
     height: 60px;
@@ -4799,7 +4860,7 @@ button:hover {
   left: 50%;
   width: 90%;
   transform: translate(-50%);
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
   margin: 0;
   color: var(--white);

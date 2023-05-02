@@ -29,7 +29,7 @@ const Sort = ({
 
   const closeSort = () => {
     if (!selectedSort.saved) {
-      setSelectedSort({ ...selectedSort, sort: null });
+      setSelectedSort({ ...selectedSort });
     }
     setIsSortOpen(false);
   };
@@ -58,6 +58,7 @@ const Sort = ({
   useEffect(() => {
     if (!formRef.current) return;
     Array.from(formRef.current.children).some((child) => {
+      console.log(selectedSort);
       if (child.id === selectedSort.sort.toString()) {
         child.children[0].checked = true;
       }

@@ -19,7 +19,14 @@ import { voteReview } from "../api/helpfulVotesApi";
 import { deleteReview } from "../api/reviewsApi";
 import { reportReview } from "../api/reportVotesApi";
 
-const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
+const SingleReview = ({
+  review,
+  debouncedValue,
+  position,
+  index,
+  refetch,
+  isTablet,
+}) => {
   const { authState } = useAuthStateContext();
   const { language } = useLanguageContext();
   const navigate = useNavigate();
@@ -248,10 +255,11 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
         />
         {position && (
           <p className="link" onClick={() => navigateCourse()}>
-            {language === "English"
-              ? singleReviewTranslations[5].english
-              : language === "Chinese" &&
-                singleReviewTranslations[5].chinese}{" "}
+            {isTablet
+              ? language === "English"
+                ? singleReviewTranslations[5].english
+                : language === "Chinese" && singleReviewTranslations[5].chinese
+              : ""}
             {"("}
             {language === "English"
               ? Course.courseEnglishName
@@ -279,9 +287,11 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
             <FaRegThumbsUp />
           )}
           {`(${HelpfulVotes.length}) ${
-            language === "English"
-              ? singleReviewTranslations[6].english
-              : language === "Chinese" && singleReviewTranslations[6].chinese
+            isTablet
+              ? language === "English"
+                ? singleReviewTranslations[6].english
+                : language === "Chinese" && singleReviewTranslations[6].chinese
+              : ""
           }`}
         </span>
         <p>
