@@ -1,3 +1,5 @@
+// Some Images used in the website
+
 export const images = [
   {
     id: 1,

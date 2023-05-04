@@ -1,3 +1,5 @@
+// Includes all the translations for the login folder and its files
+
 export const loginTranslations = [
   {
     id: 1,

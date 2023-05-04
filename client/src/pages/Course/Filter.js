@@ -4,6 +4,12 @@ import { FaTimes, FaRegStar, FaChevronUp } from "react-icons/fa";
 import { reviewFilters } from "../../assets/filters";
 import { filterTranslations } from "./courseTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+
+// The filter page / section for the course specific page to filter reviews
+// Allows users to filter by different criteria it being, ratings, year, and semester
+// If users are in mobile or tablet users must select and then apply the filters for courses to be filtered
+// If users are in desktop just selecting is enough, filters will be applied automatically
 
 const Filter = ({
   isFilterOpen,
@@ -11,10 +17,10 @@ const Filter = ({
   selectedFilters,
   setSelectedFilters,
   refetch,
-  isDesktop,
   className,
 }) => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const [tempFilters, setTempFilters] = useState(selectedFilters);
 
   // Refetch the data according to the filters selected
@@ -101,12 +107,14 @@ const Filter = ({
     }
   };
 
+  // Controls the open and closing of single filters for the desktop view
   const openClose = (e) => {
     if (!e.target.classList.contains("open-close-btn")) return;
     const filter = e.target.parentElement.parentElement;
     filter.classList.toggle("active");
   };
 
+  // If it is desktop then after selecting a filter immediately filter the results instead of pressing apply button like in the mobile and tablet view
   useEffect(() => {
     if (isDesktop) applyFilters();
   }, [tempFilters]);

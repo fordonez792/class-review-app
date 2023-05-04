@@ -8,13 +8,16 @@ const { authenticateToken } = require("../middleware/AuthMiddleware");
 
 const router = express.Router();
 
+// This file contains all routes that have to do with colleges
+// This includes admin posting colleges to db, getting colleges by id, english and chinese name, and getting all colleges from the db
+
 const getColleges = (year) => {
   return axios
     .get(`https://web.ndhu.edu.tw/INC/CourseApi/api/SubjColleges?syear=${year}`)
     .then((res) => res.data);
 };
 
-// Post colleges into database while adding the translated english name
+// Post colleges into database while adding the translated english name, only admin is allowed to do this
 router.post("/post", authenticateToken, async (req, res) => {
   const user = await Users.findOne({ where: { id: req.user.id } });
   if (!user.admin || user.username !== "admin") {

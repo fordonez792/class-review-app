@@ -7,16 +7,18 @@ import SecondLevelSideMenu from "./SecondLevelSideMenu";
 import { getColleges } from "../api/coursesApi";
 import { sideMenuTranslations } from "../assets/componentsTranslations";
 import { useLanguageContext } from "../context/LanguageContext";
+import { useScreenSizeContext } from "../context/ScreenSizeContext";
+
+// First level of the sidemenu, displays all colleges of NDHU and on click of one will redirect to the second level sidemenu
 
 const SideMenu = ({ isOpen, setIsOpen }) => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
 
   // State to control the second level sidemenu
   const [openSecondLevel, setOpenSecondLevel] = useState(false);
   // State to hold the college that has been clicked on
   const [selectedCollege, setSelectedCollege] = useState({ id: 0, name: "" });
-
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
 
   // Fetch colleges with function defined in coursesApi file
   const {
@@ -25,17 +27,7 @@ const SideMenu = ({ isOpen, setIsOpen }) => {
     data: colleges,
   } = useQuery(["colleges"], () => getColleges());
 
-  const updateState = async () => {
-    setIsDesktop(window.innerWidth > 1199);
-    setIsOpen(false);
-    setOpenSecondLevel(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
-
+  // Closes the second level sidemenu if the first level is closed
   useEffect(() => {
     if (!isOpen) setOpenSecondLevel(false);
   }, [isOpen]);

@@ -7,6 +7,10 @@ const { Users } = require("../models");
 
 const router = express.Router();
 
+// This file includes the route to verify the email
+// Users will verify their email if they have signed up locally, so the email token will be verified here
+
+// Verifies the token that was sent via email when a user signs up
 router.post("/verify-token", async (req, res) => {
   const { id, token } = req.body;
 

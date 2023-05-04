@@ -10,23 +10,30 @@ import { getCoursesByNameOrId } from "../../api/coursesApi";
 import { reviewSearchTranslations } from "./writeReviewTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 
+// This is the part of writing a review page that allows users to choose a class to review
+// If users come from a specific course, this part is skipped
+// Users can search by english name, chinese name, and course id for the course they want to review
+// If the course they want is not within the 10 courses returned then they can go to the search results page
+
 const ReviewSearch = ({ courseId, setCourseId, setStep, error, setError }) => {
   const { language } = useLanguageContext();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const debouncedValue = useDebounce(search, 1000);
 
-  // Fetch courses with function defined in coursesApi file
+  // Fetch courses with function defined in coursesApi file, 10 courses will be returned
   const courses = useQuery(
     ["searchCourses", debouncedValue],
     () => debouncedValue.length > 2 && getCoursesByNameOrId(debouncedValue)
   );
 
+  // If users can't find the course they want to review within the 10 courses, they can go to search results to look there
   const navigateSearchResults = (search) => {
     setSearch("");
     navigate(`/search/${search}`);
   };
 
+  // If a course has already been selected then display the course id that was selected
   useEffect(() => {
     if (!courseId) return;
     setError({ msg: `Course ID selected: ${courseId}`, classname: "green" });

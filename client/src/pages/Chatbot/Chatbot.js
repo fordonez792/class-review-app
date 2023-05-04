@@ -9,10 +9,18 @@ import {
   getCoursesWithChatbot,
   getCoursesByNameOrIdChatbot,
 } from "../../api/chatbotApi";
-import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
 
-const Chatbot = ({ isDesktop, setIsChatbotOpen }) => {
-  const { language } = useLanguageContext();
+// The page that allows users to interact with the chatbot
+// Users can only send predetermined messages to the chatbot for the most part
+// If user knows the course id or name of a course they are able to type it in, or users can also type their interests, and the chatbot will find the appropriate department that matches users interests
+// Chatbot can then filter out courses by 3 methods, time, rating and course level
+// From there the chatbot will send specific messages allowing the user to click on the message to be redirected to the course specific page or the search results
+// If user chose incorrectly they can also click cancel and the previous message and options will again appear
+
+const Chatbot = ({ setIsChatbotOpen }) => {
+  const { isDesktop } = useScreenSizeContext();
+
   const navigate = useNavigate();
   const resizeRef = useRef();
   const scrollBottomRef = useRef();
@@ -108,7 +116,6 @@ const Chatbot = ({ isDesktop, setIsChatbotOpen }) => {
     const courseId = e.target.dataset.course;
     const query = e.target.dataset.query;
 
-    console.log(e.target.dataset);
     // If user inputs courseId then go to the course specific page
     if (courseId) {
       navigate(`/course/${courseId}`, { state: { navigate: true } });

@@ -6,6 +6,7 @@ import App from "./src/App";
 import { LanguageProvider } from "./src/context/LanguageContext";
 import { SearchProvider } from "./src/context/SearchContext";
 import { AuthStateProvider } from "./src/context/AuthStateContext";
+import { ScreenSizeProvider } from "./src/context/ScreenSizeContext";
 
 const client = new QueryClient();
 
@@ -14,11 +15,13 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
       <AuthStateProvider>
-        <LanguageProvider>
-          <SearchProvider>
-            <App />
-          </SearchProvider>
-        </LanguageProvider>
+        <ScreenSizeProvider>
+          <LanguageProvider>
+            <SearchProvider>
+              <App />
+            </SearchProvider>
+          </LanguageProvider>
+        </ScreenSizeProvider>
       </AuthStateProvider>
     </QueryClientProvider>
   </React.StrictMode>

@@ -19,6 +19,11 @@ import { voteReview } from "../api/helpfulVotesApi";
 import { deleteReview } from "../api/reviewsApi";
 import { reportReview } from "../api/reportVotesApi";
 
+// The single review card used to display single reviews throughout the website
+// Allows users to read about the review and view the rating, as well as report and like a review
+// Only the owner of a review can delete the review
+// If the single reviews are displayed on my account page or home page, there is option to navigate to the course specific page where this review lies
+
 const SingleReview = ({
   review,
   debouncedValue,
@@ -87,18 +92,21 @@ const SingleReview = ({
     onError: (error) => console.log(error),
   });
 
+  // The option to delete the review but only if the one that clicked the option is the owner of the review
   const deleteReviewMutation = useMutation({
     mutationFn: deleteReview,
     onSuccess: () => refetch(),
     onError: (error) => console.log(error),
   });
 
+  // The option to report a review
   const reportReviewMutation = useMutation({
     mutationFn: reportReview,
     onSuccess: (data) => console.log(data),
     onError: (error) => console.log(error),
   });
 
+  // Allows closing of menu that holds the report and delete option
   const closeMenu = (e) => {
     if (window.location.pathname === "/") return;
     if (

@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  // Connects table to users, courses, helpfulvotes, and reportvotes tables
   Reviews.associate = (models) => {
     Reviews.belongsTo(models.Users, {
       foreignKey: "creator",

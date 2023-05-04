@@ -20,22 +20,29 @@ import { images } from "../../assets/images";
 import { homeTranslations } from "./homeTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { useSearchContext } from "../../context/SearchContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
 import { getMostRecentReviews } from "../../api/reviewsApi";
 import { getPopularCourses } from "../../api/coursesApi";
 
+// This will be the home page of this website
+// It includes the top 5 most popular courses at the moment, top 5 most recent reviews
+// A small description of the purpose of this website, a small description of advice on writing a review, and a small description of the addition of the chatbot and its uses and purposes
+
 const Home = () => {
-  const { setIsSearchOpen, isSearchOpen } = useSearchContext();
-  const { language } = useLanguageContext();
-
   const navigate = useNavigate();
+  const { setIsSearchOpen } = useSearchContext();
+  const { language } = useLanguageContext();
+  const { isTablet, isDesktop } = useScreenSizeContext();
 
-  const [isTablet, setIsTablet] = useState(window.innerWidth > 767);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
   const [position, setPosition] = useState(1);
 
+  // Gets top 5 most popular courses at the moment
   const popular = useQuery(["popularCourses"], () => getPopularCourses());
+
+  // Gets top 5 most recent reviews
   const reviews = useQuery(["reviews"], () => getMostRecentReviews());
 
+  // Handles infite scrolling of the most recent reviews for users in mobile devices
   const handleScroll = (e) => {
     if (e.target.classList.contains("left-btn")) {
       if (position - 1 < 1) setPosition(5);
@@ -46,16 +53,6 @@ const Home = () => {
       if (position + 1 <= 5) setPosition(position + 1);
     }
   };
-
-  const updateState = () => {
-    setIsTablet(window.innerWidth > 767);
-    setIsDesktop(window.innerWidth > 1199);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
 
   return (
     <section id="home" className="page">

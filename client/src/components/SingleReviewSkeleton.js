@@ -1,6 +1,8 @@
 import React from "react";
 import { FaStar, FaThumbsUp } from "react-icons/fa";
 
+// The loading stage for the single review card, only used when loading the data for the single reviews
+
 const SingleReviewSkeleton = () => {
   return (
     <div id="skeleton-single-review">

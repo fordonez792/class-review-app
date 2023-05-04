@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { errorTranslations } from "./errorTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 
+// This is the error page, if users try to access a route that does not exist users will be redirected to this page, where they can click the button to go back to the home page
+
 const Error = () => {
   const navigate = useNavigate();
   const { language } = useLanguageContext();

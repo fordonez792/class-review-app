@@ -1,9 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FaTimes, FaMinus, FaPlus, FaChevronUp } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaTimes, FaChevronUp } from "react-icons/fa";
 
 import { searchFilters } from "../../assets/filters";
 import { filterTranslations } from "./searchResultsTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+
+// This is the filters page for the search results page to filter courses
+// Allows users to filter courses by language course is taught in, semester course is available in, course level meaining freshman, master, etc, and day of the week the course is taught in
+// If users are in mobile or tablet users must select and then apply the filters for courses to be filtered
+// If users are in desktop just selecting is enough, filters will be applied automatically
 
 const Filter = ({
   isFilterOpen,
@@ -11,11 +17,11 @@ const Filter = ({
   selectedFilters,
   setSelectedFilters,
   refetch,
-  isDesktop,
   setPageNumber,
   className,
 }) => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const [tempFilters, setTempFilters] = useState(selectedFilters);
 
   // Refetch the data according to the filters selected
@@ -40,6 +46,7 @@ const Filter = ({
     setIsFilterOpen(false);
   };
 
+  // Handles opening and closing of a single filter, only on desktop
   const openClose = (e) => {
     if (!e.target.classList.contains("open-close-btn")) return;
     const filter = e.target.parentElement.parentElement;
@@ -119,6 +126,7 @@ const Filter = ({
     }
   };
 
+  // If it is desktop then after selecting a filter immediately filter the results instead of pressing apply button like in the mobile and tablet view
   useEffect(() => {
     if (isDesktop) applyFilters();
   }, [tempFilters]);

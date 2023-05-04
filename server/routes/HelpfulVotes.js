@@ -4,6 +4,10 @@ const { authenticateToken } = require("../middleware/AuthMiddleware");
 
 const router = express.Router();
 
+// This file contains the routes to do with helpfulvotes
+// User can only like once or remove their like from the review
+
+// Controls liking and unliking a review, as well as updating the number of likes a user has received and the number of likes the review has
 router.post("/", authenticateToken, async (req, res) => {
   const { reviewId } = req.body;
 

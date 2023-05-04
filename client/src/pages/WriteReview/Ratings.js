@@ -6,12 +6,18 @@ import { useLanguageContext } from "../../context/LanguageContext";
 
 import CriteriaModal from "./CriteriaModal";
 
+// This is the ratings section for writing a review page
+// Users can choose their desired ratings for a specific course here choosing from 1 to 5 stars one being really bad and 5 being really good
+// Classes are rated based on five criteria which would be difficulty, engaging, effectiveness, fair assessments, and the most important one being recommend
+// If users want to know more about what each criteria means or the rating for each criteria, they can choose to open the criteria modal by clicking on the information icon next to the criteria name
+
 const Ratings = ({ ratings, setRatings }) => {
   const { language } = useLanguageContext();
   const criteriaRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
 
+  // Connects the rating chosen by the user to the state variables
   const handleChange = (e) => {
     const { parentElement } = e.target.parentElement;
     if (!criteria.find((e) => e.english === parentElement.id)) return;
@@ -25,12 +31,14 @@ const Ratings = ({ ratings, setRatings }) => {
     setRatings(nextState);
   };
 
+  // Opens the modal with the selected criteria
   const openModal = (criterion) => {
     if (language === "English") setName(criterion.english);
     if (language === "Chinese") setName(criterion.chinese);
     setIsModalOpen(true);
   };
 
+  // If there are previous ratings given by the user, they will be persisted and shown was again to the user
   useEffect(() => {
     // on mount the previous ratings inputted will be preserved and shown
     Array.from(criteriaRef.current.children).forEach((child, index) => {

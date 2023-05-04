@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Allows users to report a review
 export const reportReview = ({ id }) => {
   return axios
     .post(

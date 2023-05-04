@@ -1,3 +1,5 @@
+// Information for the criteria modal with translations in both english and chinese
+
 export const criteria = [
   { english: "difficulty", chinese: "難度" },
   { english: "engaging", chinese: "互動性" },

@@ -20,9 +20,17 @@ import {
 import { getDepartments, getCourses } from "../../api/coursesApi";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { searchResultsTranslations } from "./searchResultsTranslations";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+
+// This is the main page for the search results
+// This page can be accessed by selecting a department, if this is the case, all other departments for the same college will also be displayed as related departments allowing users to easily choose a different department from the same college
+// This page can also be accessed by using the searchbars and viewing all results that match the string, if this is the case, no related departments will be found, only the courses that match the search string
+// The results in this page are also paginated meaning, if there are 20 results there will be 2 pages, each page displaying 10 courses
+// From the results, courses can also be sorted or filtered by different criteria
 
 const SearchResults = () => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const displayDepartmentsRef = useRef();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -33,8 +41,9 @@ const SearchResults = () => {
   const departmentId = searchParams.get("departmentId");
   const filter = searchParams.get("filter");
 
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
   const [displayDepartments, setDisplayDepartments] = useState();
+
+  // States to control the selected sort by user
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState({
     sort: 0,
@@ -42,6 +51,7 @@ const SearchResults = () => {
       language === "English" ? "Default" : language === "Chinese" && "默認",
     saved: false,
   });
+  // States to control the selected filters by user
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     departmentId,
@@ -102,6 +112,7 @@ const SearchResults = () => {
     setSelectedFilters({ ...selectedFilters, departmentId: e.target.id });
   };
 
+  // Resets filters to their original state, everything empty
   const resetFilter = () => {
     setSelectedFilters({
       ...selectedFilters,
@@ -153,15 +164,6 @@ const SearchResults = () => {
     tempArray.unshift(selected);
     setDisplayDepartments(tempArray);
   }, [setSearchParams, departments.data]);
-
-  const updateState = () => {
-    setIsDesktop(window.innerWidth > 1199);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
 
   return (
     <>

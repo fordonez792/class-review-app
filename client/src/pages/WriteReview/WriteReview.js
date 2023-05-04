@@ -11,6 +11,12 @@ import { writeReviewTranslations } from "./writeReviewTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { postReview } from "../../api/reviewsApi";
 
+// This is the main page of the writing a review page
+// This page is divided into 3 sections being search for a course section, rate the course section, and input the information for the review
+// Users can go back and forth between the sections with the information still remaining / persisting
+// But users can't continue to the next step if the information for the current step is incomplete
+// Once all information is done correctly and nothing is missing, users can submit the data, creating a review in the db and navigating to the course they chose to write a review on
+
 const WriteReview = () => {
   const { language } = useLanguageContext();
   const navigate = useNavigate();
@@ -19,6 +25,7 @@ const WriteReview = () => {
   const progressBarRef = useRef();
 
   const [step, setStep] = useState(id ? 1 : 0);
+  // State that controls the ratings chosen by a user
   const [ratings, setRatings] = useState([
     { name: criteria[0], selection: 0 },
     { name: criteria[1], selection: 0 },
@@ -26,6 +33,7 @@ const WriteReview = () => {
     { name: criteria[3], selection: 0 },
     { name: criteria[4], selection: 0 },
   ]);
+  // State that controls the review information inputed by a user
   const [reviewInfo, setReviewInfo] = useState({
     title: "",
     description: "",

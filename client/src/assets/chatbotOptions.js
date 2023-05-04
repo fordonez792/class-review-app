@@ -1,3 +1,5 @@
+// Predefined options for a user to send to the chatbot, including different search types for courses
+
 export const userOptions = [
   {
     step: 1,

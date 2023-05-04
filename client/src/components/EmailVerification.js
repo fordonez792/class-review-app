@@ -6,6 +6,9 @@ import axios from "axios";
 import { useLanguageContext } from "../context/LanguageContext";
 import { emailVerificationTranslations } from "../assets/componentsTranslations";
 
+// Page a user is redirected after email address is verified through email sent by server
+// From here users can login once again, if they verified within 1 hour of the email being sent
+
 const EmailVerification = () => {
   const { language } = useLanguageContext();
   const navigate = useNavigate();

@@ -12,27 +12,36 @@ import { getReportedReviews, getAllReviews } from "../../api/reviewsApi";
 import { getAllUsers } from "../../api/usersApi";
 import { getNumberOfCoursesWithReviews } from "../../api/coursesApi";
 
+// Admin page specific for the single admin user, only accessible to him
+// Has access some server and database information, such as the number of users that signed up, total number of reviews, total number of courses with reviews, and most importantly all reviews that have 10 or more report votes
+// Admin has the power to moderate this reviews and decide if they should be deleted
+
 const Admin = () => {
   const navigate = useNavigate();
   const { authState } = useAuthStateContext();
 
+  // Returns all reviews that have 10 or more report votes
   const reportedReviews = useQuery(["reportedReviews"], () =>
     getReportedReviews()
   );
 
+  // Gets the total number of reviews that have been submitted to the db
   const totalNumberOfReviews = useQuery(["totalNumberOfReviews"], () =>
     getAllReviews()
   );
 
+  // Gets the total number of users that have signed up to use the website
   const totalNumberOfUsers = useQuery(["totalNumberOfUsers"], () =>
     getAllUsers()
   );
 
+  // Gets the total number of courses that have reviews written to them
   const totalNumberOfCoursesWithReviews = useQuery(
     ["totalNumberOfCoursesWithReviews"],
     () => getNumberOfCoursesWithReviews()
   );
 
+  // Only allows for the admin to navigate to this page, if not admin then redirected to the home page
   useEffect(() => {
     if (!authState) return;
     if (!localStorage.getItem("accessToken")) navigate("/");

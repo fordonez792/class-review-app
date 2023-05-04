@@ -10,7 +10,13 @@ import { yearOptions, semesterOptions } from "../../assets/reviewInfoDropdown";
 import { reviewInfoTranslations } from "./writeReviewTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 
-const ReviewInfo = ({ reviewInfo, setReviewInfo, error, setError }) => {
+// This is the part in which a user writes the review itself or the writing a review page
+// Users can choose a title, and write a description which will later be displayed throughout the website
+// Users will then choose a year and semester in which they took the course
+// And finally they can choose if they want the review to be anonymous or not
+// After the review is submitted users will be redirected to the course specific page for the review they just wrote
+
+const ReviewInfo = ({ reviewInfo, setReviewInfo, error }) => {
   const { language } = useLanguageContext();
   const yearRef = useRef();
   const semesterRef = useRef();
