@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const dotenv = require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config({ path: __dirname + "/.env" });
 
 module.exports = {
   mode: "development",
@@ -49,7 +49,29 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
+      process: "process/browser",
       "process.env.REACT_APP_URL": JSON.stringify(process.env.REACT_APP_URL),
+      "process.env.REACT_APP_FIREBASE_API_KEY": JSON.stringify(
+        process.env.REACT_APP_FIREBASE_API_KEY
+      ),
+      "process.env.REACT_APP_FIREBASE_AUTH_DOMAIN": JSON.stringify(
+        process.env.REACT_APP_FIREBASE_AUTH_DOMAIN
+      ),
+      "process.env.REACT_APP_FIREBASE_PROJECT_ID": JSON.stringify(
+        process.env.REACT_APP_FIREBASE_PROJECT_ID
+      ),
+      "process.env.REACT_APP_FIREBASE_STORAGE_BUCKET": JSON.stringify(
+        process.env.REACT_APP_FIREBASE_STORAGE_BUCKET
+      ),
+      "process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID": JSON.stringify(
+        process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+      ),
+      "process.env.REACT_APP_FIREBASE_APP_ID": JSON.stringify(
+        process.env.REACT_APP_FIREBASE_APP_ID
+      ),
+      "process.env.REACT_APP_FIREBASE_MEASUREMENT_ID": JSON.stringify(
+        process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+      ),
     }),
   ],
 };
