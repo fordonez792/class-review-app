@@ -231,6 +231,15 @@ router.get("/account", authenticateToken, async (req, res) => {
 });
 
 router.get("/number-of-users", authenticateToken, async (req, res) => {
+  const user = await Users.findOne({ where: { id: req.user.id } });
+  if (!user.admin || user.username !== "admin") {
+    res.json({
+      status: "FAILED",
+      message: "You can't get number of users",
+    });
+    return;
+  }
+
   Users.findAll()
     .then((users) => {
       res.status(200).json(users.length - 1);

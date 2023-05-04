@@ -36,7 +36,7 @@ const Admin = () => {
   useEffect(() => {
     if (!authState) return;
     if (!localStorage.getItem("accessToken")) navigate("/");
-    if (authState.id === 0 || authState.username === "") return;
+    if (authState.id === 0 || authState.username === "") navigate("/");
     if (!authState.admin) navigate("/");
   }, [authState, authState.admin]);
 

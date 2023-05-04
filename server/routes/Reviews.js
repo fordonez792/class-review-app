@@ -360,6 +360,15 @@ router.delete("/delete/:id/:courseId", authenticateToken, async (req, res) => {
 });
 
 router.get("/reported", authenticateToken, async (req, res) => {
+  const user = await Users.findOne({ where: { id: req.user.id } });
+  if (!user.admin || user.username !== "admin") {
+    res.json({
+      status: "FAILED",
+      message: "You can't get the list of reported reviews",
+    });
+    return;
+  }
+
   const Op = Sequelize.Op;
 
   Reviews.findAll({

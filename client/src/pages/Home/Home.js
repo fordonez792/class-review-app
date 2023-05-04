@@ -13,6 +13,8 @@ import Footer from "../../components/Footer";
 import ChatbotDesktop from "../Chatbot/ChatbotDesktop";
 import Loading from "../../components/Loading";
 
+import reviewPic from "../../assets/review_pic.jpg";
+import robotPic from "../../assets/robot_pic.jpg";
 import homePic from "../../assets/home_pic.jpg";
 import { images } from "../../assets/images";
 import { homeTranslations } from "./homeTranslations";
@@ -181,12 +183,12 @@ const Home = () => {
               })}
           </ul>
         </article>
-        <article className="write-a-review">
+        <article className="our-website">
           <div className="header">
             <h1>
               {language === "English"
-                ? homeTranslations[5].english
-                : language === "Chinese" && homeTranslations[5].chinese}
+                ? homeTranslations[10].english
+                : language === "Chinese" && homeTranslations[10].chinese}
             </h1>
           </div>
           <div className="picture">
@@ -197,6 +199,44 @@ const Home = () => {
               {language === "English"
                 ? homeTranslations[6].english
                 : language === "Chinese" && homeTranslations[6].chinese}
+            </p>
+          </div>
+        </article>
+        <article className="write-a-review">
+          <div className="header">
+            <h1>
+              {language === "English"
+                ? homeTranslations[5].english
+                : language === "Chinese" && homeTranslations[5].chinese}
+            </h1>
+          </div>
+          <div className="picture">
+            <img src={reviewPic} alt="" />
+          </div>
+          <div className="paragraph">
+            <p>
+              {language === "English"
+                ? homeTranslations[7].english
+                : language === "Chinese" && homeTranslations[7].chinese}
+            </p>
+          </div>
+        </article>
+        <article className="chatbot-section">
+          <div className="header">
+            <h1>
+              {language === "English"
+                ? homeTranslations[11].english
+                : language === "Chinese" && homeTranslations[11].chinese}
+            </h1>
+          </div>
+          <div className="picture">
+            <img src={robotPic} alt="" />
+          </div>
+          <div className="paragraph">
+            <p>
+              {language === "English"
+                ? homeTranslations[8].english
+                : language === "Chinese" && homeTranslations[8].chinese}
             </p>
           </div>
         </article>

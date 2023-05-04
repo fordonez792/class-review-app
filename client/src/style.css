@@ -5029,6 +5029,8 @@ button:hover {
 #home .popular .popular-courses li:hover {
   background-color: var(--light-gray);
 }
+#home .our-website,
+#home .chatbot-section,
 #home .write-a-review {
   display: flex;
   justify-content: center;
@@ -5036,10 +5038,14 @@ button:hover {
   flex-direction: column;
   width: 100%;
   margin-top: 10px;
-  margin-bottom: 10px;
   padding-bottom: 30px;
   background-color: var(--white);
 }
+#home .chatbot-section {
+  margin-bottom: 10px;
+}
+#home .our-website .picture,
+#home .chatbot-section .picture,
 #home .write-a-review .picture {
   margin-top: 15px;
   border-radius: 10px;
@@ -5048,21 +5054,27 @@ button:hover {
   min-height: unset !important;
   width: 90%;
 }
+#home .our-website .picture::after,
+#home .chatbot-section .picture::after,
 #home .write-a-review .picture::after {
   all: unset;
 }
+#home .our-website .picture img,
+#home .chatbot-section .picture img,
 #home .write-a-review .picture img {
   height: 100%;
   width: 100%;
   object-fit: contain;
 }
-#home .about-us .paragraph,
+#home .our-website .paragraph,
+#home .chatbot-section .paragraph,
 #home .write-a-review .paragraph {
   margin-top: 15px;
   border-radius: 10px;
   width: 90%;
 }
-#home .about-us .paragraph p,
+#home .our-website .paragraph p,
+#home .chatbot-section .paragraph p,
 #home .write-a-review .paragraph p {
   margin: 0;
   padding: 10px;
@@ -5146,6 +5158,8 @@ button:hover {
   #home .popular .popular-courses li span:last-child {
     font-size: calc(0.8rem * 1.1);
   }
+  #home .our-website .picture,
+  #home .chatbot-section .picture,
   #home .write-a-review .picture {
     height: 400px;
   }
@@ -5219,15 +5233,26 @@ button:hover {
     margin-right: 30px;
     margin-bottom: 11px;
   }
+  #home .our-website,
+  #home .chatbot-section,
   #home .write-a-review {
     width: 80%;
     margin-top: 20px;
-    margin-bottom: 20px;
     border-radius: 3px;
     overflow: hidden;
   }
+  #home .chatbot-section {
+    margin-bottom: 20px;
+  }
+  #home .our-website .picture img,
+  #home .chatbot-section .picture img,
   #home .write-a-review .picture img {
     object-fit: cover;
+  }
+  #home .our-website .paragraph,
+  #home .chatbot-section .paragraph,
+  #home .write-a-review .paragraph {
+    width: 80%;
   }
 }
 /* End of Media Query Home */

@@ -2,8 +2,9 @@ require("dotenv").config();
 
 const axios = require("axios");
 const express = require("express");
-const { Colleges } = require("../models");
+const { Users, Colleges } = require("../models");
 const { getTranslation } = require("../services/Translation");
+const { authenticateToken } = require("../middleware/AuthMiddleware");
 
 const router = express.Router();
 
@@ -14,7 +15,16 @@ const getColleges = (year) => {
 };
 
 // Post colleges into database while adding the translated english name
-router.post("/post", async (req, res) => {
+router.post("/post", authenticateToken, async (req, res) => {
+  const user = await Users.findOne({ where: { id: req.user.id } });
+  if (!user.admin || user.username !== "admin") {
+    res.json({
+      status: "FAILED",
+      message: "You can't post colleges",
+    });
+    return;
+  }
+
   const { year } = req.body;
   const colleges = await getColleges(year);
   const newColleges = Array.from(colleges).map((college) => {

@@ -2,7 +2,8 @@ require("dotenv").config();
 
 const axios = require("axios");
 const express = require("express");
-const { Departments, Colleges } = require("../models");
+const { Users, Departments, Colleges } = require("../models");
+const { authenticateToken } = require("../middleware/AuthMiddleware");
 const { getTranslation } = require("../services/Translation");
 
 const router = express.Router();
@@ -23,7 +24,16 @@ const getDepartments = (year, collegeId) => {
     .then((res) => res.data);
 };
 
-router.post("/post", async (req, res) => {
+router.post("/post", authenticateToken, async (req, res) => {
+  const user = await Users.findOne({ where: { id: req.user.id } });
+  if (!user.admin || user.username !== "admin") {
+    res.json({
+      status: "FAILED",
+      message: "You can't post departments",
+    });
+    return;
+  }
+
   const { year } = req.body;
   const allDepartments = [];
 

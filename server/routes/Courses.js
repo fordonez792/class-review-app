@@ -3,7 +3,7 @@ require("dotenv").config();
 const axios = require("axios");
 const express = require("express");
 const { authenticateToken } = require("../middleware/AuthMiddleware");
-const { Courses, Departments, Sequelize } = require("../models");
+const { Users, Courses, Departments, Sequelize } = require("../models");
 
 const router = express.Router();
 
@@ -26,7 +26,16 @@ const getCourses = (year, semester, departmentId) => {
 };
 
 // Posts all classes that are not already in the database by year and semester
-router.post("/post", async (req, res) => {
+router.post("/post", authenticateToken, async (req, res) => {
+  const user = await Users.findOne({ where: { id: req.user.id } });
+  if (!user.admin || user.username !== "admin") {
+    res.json({
+      status: "FAILED",
+      message: "You can't post courses",
+    });
+    return;
+  }
+
   const { year, semester } = req.body;
   let newCourses = [];
 
@@ -451,6 +460,15 @@ router.get("/popular", async (req, res) => {
 });
 
 router.get("/with-reviews", authenticateToken, async (req, res) => {
+  const user = await Users.findOne({ where: { id: req.user.id } });
+  if (!user.admin || user.username !== "admin") {
+    res.json({
+      status: "FAILED",
+      message: "You can't get number of courses with reviews",
+    });
+    return;
+  }
+
   const Op = Sequelize.Op;
 
   Courses.findAll({ where: { numberOfReviews: { [Op.gte]: 1 } } })
