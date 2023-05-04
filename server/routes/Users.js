@@ -9,6 +9,10 @@ const { verifyEmail } = require("../services/Email");
 
 const router = express.Router();
 
+// This file contains all routes that have to do with users
+// It contains signing up, logging in, retreiving all account information and reviews for the logged in user, as well as the authentication of the accesstoken on refresh to persist login on the client, and the total number of users signed up to the website and db exclusive for the admin
+
+// Handles signup locally
 router.post("/signup", async (req, res) => {
   const { email, username, password } = req.body;
 
@@ -64,6 +68,7 @@ router.post("/signup", async (req, res) => {
     .catch((error) => console.log(error));
 });
 
+// Handles signup through google
 router.post("/signup-google", async (req, res) => {
   const { email, username, photoUrl } = req.body;
 
@@ -122,6 +127,7 @@ router.post("/signup-google", async (req, res) => {
     });
 });
 
+// Handles login for users both through google and locally
 router.post("/login", async (req, res) => {
   const { field, usernameOrEmail, password } = req.body;
 
@@ -196,10 +202,12 @@ router.post("/login", async (req, res) => {
     });
 });
 
+// Authenticates token on refresh of the page
 router.get("/auth", authenticateToken, async (req, res) => {
   res.json(req.user);
 });
 
+// Gets the information for the logged in user and all their reviews
 router.get("/account", authenticateToken, async (req, res) => {
   const reviews = await Reviews.findAll({
     where: { creator: req.user.id },
@@ -230,6 +238,7 @@ router.get("/account", authenticateToken, async (req, res) => {
     });
 });
 
+// Gets the total number of users that have signed up
 router.get("/number-of-users", authenticateToken, async (req, res) => {
   const user = await Users.findOne({ where: { id: req.user.id } });
   if (!user.admin || user.username !== "admin") {

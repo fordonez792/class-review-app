@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  // Connects this table to the colleges table
   Departments.associate = (models) => {
     Departments.belongsTo(models.Colleges, {
       foreignKey: "collegeId",

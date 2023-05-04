@@ -1,3 +1,5 @@
+// Contains all the translations for the error folder and the file inside it
+
 export const errorTranslations = [
   {
     id: 1,

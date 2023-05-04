@@ -8,6 +8,11 @@ import axios from "axios";
 import { signupTranslations } from "./signupTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 
+// This is the signup page for this website
+// Allows users to create their account locally
+// Users must provide an ndhu email address, a unique username, a password and confirm that password
+// Users can also choose to navigate from here to the login page
+
 const Signup = () => {
   const { language } = useLanguageContext();
   const navigate = useNavigate();
@@ -20,6 +25,7 @@ const Signup = () => {
     confirm: "",
   };
 
+  // This will restrict the input of the username, email, password, and confirm password
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .min(
@@ -113,6 +119,7 @@ const Signup = () => {
       ),
   });
 
+  // Sends data to server so user can be created, user will then have to verify their email, as only ndhu students are accepted
   const handleSubmit = (data, actions) => {
     axios
       .post(`${process.env.REACT_APP_URL}users/signup`, data)

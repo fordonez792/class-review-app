@@ -11,15 +11,20 @@ import {
 import { criteriaModalTranslations } from "./writeReviewTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 
+// This is the criteria modal that can be accessed when writing a review and choosing the ratings for a particular class
+// If users are wondering about what is meant by a certain criteria or rating then they can read about it in here
+
 const CriteriaModal = ({ isModalOpen, setIsModalOpen, name, setName }) => {
   const { language } = useLanguageContext();
   const [array, setArray] = useState();
 
+  // Closes the modal
   const closeModal = (e) => {
     setName("");
     setIsModalOpen(false);
   };
 
+  // Sets the correct array to be used in the modal according to the criteria that was choosen
   useEffect(() => {
     if (name.toLowerCase() === "difficulty" || name === "難度")
       setArray(difficultyDescription);

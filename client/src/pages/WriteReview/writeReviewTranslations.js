@@ -1,3 +1,5 @@
+// This file contains all the translations for the write review folder and the files inside it
+
 export const writeReviewTranslations = [
   {
     id: 1,

@@ -4,6 +4,10 @@ import { FaFileAlt, FaPlus, FaMinus } from "react-icons/fa";
 import { courseInfoTranslations } from "./courseTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 
+// In charge of the course information section of the course specific page
+// Displays basic all the information for a course including, teacher time, language, course name, department ,number of credits, which semester is it taught in, and is it taught in english
+// Users can also minimize this section on mobile or tablet
+
 const CourseInfoSection = ({
   courseId,
   teacher,

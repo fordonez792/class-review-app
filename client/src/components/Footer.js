@@ -6,10 +6,13 @@ import logo from "../assets/logo.png";
 import { footerTranslations } from "../assets/componentsTranslations";
 import { useLanguageContext } from "../context/LanguageContext";
 
+// Footer of the page that includes the option to change language of the whole website to english or chinese
+
 const Footer = () => {
   const { language, chooseLanguage } = useLanguageContext();
   const dropdownRef = useRef();
 
+  // Opens the dropdown when clicking on the input
   const openDropdown = (e) => {
     if (!e.target.id === "language" && !e.target.classList.contains("icon"))
       return;

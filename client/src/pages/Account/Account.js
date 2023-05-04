@@ -11,12 +11,17 @@ import ChatbotDesktop from "../Chatbot/ChatbotDesktop";
 import { getAccount } from "../../api/usersApi";
 import { accountTranslations } from "./accountTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+
+// This is the Account page, displays the main information for a user, username, photo if one, number of contributions, and number of helpful votes received in all their reviews
+// Also all their reviews will be displayed in this page, with the option of navigating to the specific course page that a review belongs to
 
 const Account = () => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const navigate = useNavigate();
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
 
+  // Gets the account information including the information specific to the user logged in, as well as all the reviews this user has written
   const {
     status,
     data: account,
@@ -30,15 +35,6 @@ const Account = () => {
       return;
     }
   }, []);
-
-  const updateState = () => {
-    setIsDesktop(window.innerWidth > 1199);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
 
   return (
     <section id="account">

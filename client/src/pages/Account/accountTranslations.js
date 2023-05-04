@@ -1,3 +1,5 @@
+// Includes all translations for the account page
+
 export const accountTranslations = [
   {
     id: 1,

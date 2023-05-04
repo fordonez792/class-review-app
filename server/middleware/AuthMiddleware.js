@@ -2,6 +2,9 @@ const { verify } = require("jsonwebtoken");
 const firebase = require("firebase-admin");
 const { Users } = require("../models");
 
+// This function verifies the access tokens that are sent by the client side, make sure they are not expired, and that they are real access tokens
+// It handles both firebase access tokens and local access tokens
+
 const authenticateToken = async (req, res, next) => {
   const accessToken = req.header("accessToken");
   if (accessToken == null) {

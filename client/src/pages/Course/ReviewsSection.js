@@ -8,6 +8,12 @@ import Sort from "./Sort";
 
 import { reviewsSectionTranslations } from "./courseTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+
+// This is the reviews section for the course specific page
+// It includes all the reviews submitted by other users for this course
+// It includes access to the filter and sorting methods to filter and sort the reviews
+// It as well has a searchbar to search for keywords among the reviews, this functionality looks for the keyword in all the reviews and returns only the reviews containing the keyword as well as highlighting the keyword for easier view for the user
 
 const ReviewsSection = ({
   search,
@@ -23,10 +29,9 @@ const ReviewsSection = ({
   setIsFilterOpen,
   selectedFilters,
   setSelectedFilters,
-  isTablet,
-  isDesktop,
 }) => {
   const { language } = useLanguageContext();
+  const { isTablet, isDesktop } = useScreenSizeContext();
 
   // Opens the searchbar applying the css animation
   const openSearchBar = (e) => {

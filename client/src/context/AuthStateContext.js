@@ -11,7 +11,10 @@ import { auth } from "../Firebase";
 
 export const AuthStateContext = React.createContext();
 
+// Provides the logged in information, and persists the login from the user if the user is real user
+
 export const AuthStateProvider = ({ children }) => {
+  // Main state to know if a user is logged in or not, or if he is admin or not
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
@@ -73,6 +76,7 @@ export const AuthStateProvider = ({ children }) => {
 
   const provider = new GoogleAuthProvider();
 
+  // Google sign in popup appears
   const googleSignIn = () => {
     return signInWithPopup(auth, provider);
   };

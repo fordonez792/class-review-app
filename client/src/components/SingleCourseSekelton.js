@@ -1,6 +1,8 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
+// The loading stage of the single course cards, displays a skeleton of the single course, only used when loading the single course data
+
 const SingleCourseSkeleton = () => {
   return (
     <article id="skeleton-single-course">

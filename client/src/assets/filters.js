@@ -1,3 +1,5 @@
+// Predefined filters for the search results page
+
 export const searchFilters = [
   {
     id: 1,
@@ -47,6 +49,8 @@ export const searchFilters = [
   },
 ];
 
+// Predefined filters for the course specific page for reviews
+
 export const reviewFilters = [
   {
     id: 1,
@@ -81,6 +85,8 @@ export const reviewFilters = [
     ],
   },
 ];
+
+// Chatbot arrays to allow backend to know which values to look for in the db
 
 export const chatbotRatings = [
   "overallMostDifficult",

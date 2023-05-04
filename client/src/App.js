@@ -15,17 +15,13 @@ import Course from "./pages/Course/Course";
 import Account from "./pages/Account/Account";
 import Admin from "./pages/Admin/Admin";
 
+import { useScreenSizeContext } from "./context/ScreenSizeContext";
+
+// This file contains all the routes for this website
+
 const App = () => {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
+  const { isDesktop } = useScreenSizeContext();
 
-  const updateState = () => {
-    setIsDesktop(window.innerWidth > 1199);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
   return (
     <Router>
       <Routes>

@@ -6,6 +6,8 @@ const { detectIntent } = require("../services/Chatbot");
 
 const router = express.Router();
 
+// This file handles everything to do with the Chatbot including sending and receiving messages from the chatbot, filtering and finding courses with the help of the chatbot
+
 // Handles sending a message to the chatbot and getting the response
 router.post("/send-message", async (req, res) => {
   const { language, message, sessionId } = req.body;
@@ -76,12 +78,14 @@ router.post("/get-courses", async (req, res) => {
 
   Courses.findAll({ where })
     .then((courses) => {
+      // If only 1 course is found, user can navigate to course specific page
       if (Array.from(courses).length === 1) {
         res.json({
           message: `Only course matching your criteria: ${courses[0].courseEnglishName} - ${courses[0].courseId}`,
           author: "chatbot-click",
           courseId: courses[0].courseId,
         });
+        // If many courses are found then navigate to search results page
       } else {
         res.json({
           message: `${Array.from(courses).length} courses found`,

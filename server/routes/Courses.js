@@ -7,6 +7,11 @@ const { Users, Courses, Departments, Sequelize } = require("../models");
 
 const router = express.Router();
 
+// This file contains all the routes that have to do with courses
+// This includes posting courses only allowed for admin, getting courses by id, english and chinese name, by department, courses that fit the filtering criteria, and matching courses id or english or chinese name to a string, as well as top 5 most popular courses
+// Also increases the visited variable in the db that tracks how many times the course specific page has been visited, therefore knowing which courses are more popular than others
+// Lastly, reserved only for the admin, get the number of courses that have reviews
+
 // Get all department Ids only
 const getDepartmentsId = async () => {
   const departmentsId = await Departments.findAll({

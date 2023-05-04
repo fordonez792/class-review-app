@@ -54,18 +54,21 @@ export const increaseVisited = (courseId) => {
   axios.put(`${process.env.REACT_APP_URL}courses/increase-visited/${courseId}`);
 };
 
+// Returns the top 5 most popular courses
 export const getPopularCourses = () => {
   return axios
     .get(`${process.env.REACT_APP_URL}courses/popular`)
     .then((res) => res.data);
 };
 
+// Returns a course that matches the id given
 export const getCourseById = (courseId) => {
   return axios
     .get(`${process.env.REACT_APP_URL}courses/get-by-id/${courseId}`)
     .then((res) => res.data);
 };
 
+// Specific for admins, returns the number of courses with reviews
 export const getNumberOfCoursesWithReviews = () => {
   return axios
     .get(`${process.env.REACT_APP_URL}courses/with-reviews`, {

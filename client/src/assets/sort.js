@@ -1,3 +1,5 @@
+// Predefined sort options for the search results page
+
 export const searchSort = [
   {
     id: 0,
@@ -24,6 +26,8 @@ export const searchSort = [
     value: 3,
   },
 ];
+
+// Predefined sort options for the course specific page for the reviews
 
 export const reviewSort = [
   {

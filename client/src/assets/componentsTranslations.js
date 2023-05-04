@@ -1,3 +1,5 @@
+// Translations for both english and chinese for all files in the components folder
+
 export const navbarTranslations = [
   {
     id: 1,

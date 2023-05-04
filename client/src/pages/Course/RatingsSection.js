@@ -3,12 +3,19 @@ import { FaStar, FaStarHalf, FaPlus, FaMinus } from "react-icons/fa";
 
 import { ratingsSectionTranslations } from "./courseTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
 import {
   difficultyDescription,
   engagingDescription,
   effectivenessDescription,
   fairAssessmentsDescription,
 } from "../../assets/criteria";
+
+// This is the ratings section of the course specific page
+// Displays the overall rating of the course measured specifically by the average recommend ratings given by users
+// It as well displays the average rating for the other criteria including difficulty, engaging, effectiveness, and fair assessments
+// Moreover if the user is in desktop they can see the definition of the criteria by hovering over it
+// Users can also minimize this section on mobile or tablet
 
 const RatingsSection = ({
   overallDifficulty,
@@ -17,9 +24,9 @@ const RatingsSection = ({
   overallFairAssessments,
   overallRecommend,
   numberOfReviews,
-  isDesktop = { isDesktop },
 }) => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const ratingsRef = useRef();
   const criteriaRef = useRef();
   const [isRatingsOpen, setIsRatingsOpen] = useState(true);
@@ -31,6 +38,7 @@ const RatingsSection = ({
     }
   };
 
+  // If user is on desktop then user can see the definition of each criteria by hovering on it
   const displayDefinition = (e) => {
     if (!isDesktop) return;
     const definition = criteriaRef.current.children[4];
@@ -68,6 +76,7 @@ const RatingsSection = ({
     }
   };
 
+  // Once user hovers outside criteria just close it
   const resetDefinition = () => {
     if (!isDesktop) return;
     const definition = criteriaRef.current.children[4];

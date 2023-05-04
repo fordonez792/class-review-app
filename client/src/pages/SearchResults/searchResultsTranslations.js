@@ -1,3 +1,5 @@
+// This file contains all the translations for the search results folder including the files in it
+
 export const searchResultsTranslations = [
   {
     id: 1,

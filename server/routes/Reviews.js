@@ -12,6 +12,9 @@ const { authenticateToken } = require("../middleware/AuthMiddleware");
 
 const router = express.Router();
 
+// This file contains all routes that have to do with reviews
+// It contains creating a review reserved for signed up users only, get all reviews for one course, get reviews by filtered and sorted criteria, get the 5 most recent reviews, deletion of reviews by either the creator or the admin, getting the total number of reviews exclusive for admin, and get all reviews that have 10 or more report votes also exclusive for admin
+
 // Creates a new review and updates the information for the course reviewed
 router.post("/create", authenticateToken, async (req, res) => {
   const { ratings, reviewInfo, courseId } = req.body;
@@ -235,7 +238,7 @@ router.get("/filter/", async (req, res) => {
     });
 });
 
-// Get the top 5 most popular courses by the visited value
+// Get the top 5 most recent reviews submitted
 router.get("/recent", async (req, res) => {
   Reviews.findAll({
     limit: 5,
@@ -262,14 +265,18 @@ router.get("/recent", async (req, res) => {
     });
 });
 
+// Handles deletion of a review either by the owner of the review or by the admin himself, also updates other information on the users page and course page such as ratings
 router.delete("/delete/:id/:courseId", authenticateToken, async (req, res) => {
   const { id, courseId } = req.params;
+
+  const userClicked = await Users.findOne({ where: { id: req.user.id } });
 
   if (!id) {
     res.status(404).json({
       status: "FAILED",
       message: "No id was passed on to delete review",
     });
+    return;
   }
 
   if (!courseId) {
@@ -277,12 +284,21 @@ router.delete("/delete/:id/:courseId", authenticateToken, async (req, res) => {
       status: "FAILED",
       message: "No id was passed on to look for course",
     });
+    return;
   }
 
   const review = await Reviews.findOne({
     where: { id },
     include: HelpfulVotes,
   });
+
+  if (review.creator !== userClicked.id || !userClicked.admin) {
+    res.json({
+      status: "FAILED",
+      message: "You are not allowed to delete this review",
+    });
+    return;
+  }
 
   const user = await Users.findOne({ where: { id: review.creator } });
   const course = await Courses.findOne({ where: { id: courseId } });
@@ -359,6 +375,7 @@ router.delete("/delete/:id/:courseId", authenticateToken, async (req, res) => {
     });
 });
 
+// Returns all reviews that have 10 or more report votes, exclusive for the admin
 router.get("/reported", authenticateToken, async (req, res) => {
   const user = await Users.findOne({ where: { id: req.user.id } });
   if (!user.admin || user.username !== "admin") {
@@ -394,7 +411,17 @@ router.get("/reported", authenticateToken, async (req, res) => {
     });
 });
 
+// Returns the total number of reviews, exclusive for the admin
 router.get("/number-of-reviews", authenticateToken, async (req, res) => {
+  const user = await Users.findOne({ where: { id: req.user.id } });
+  if (!user.admin || user.username !== "admin") {
+    res.json({
+      status: "FAILED",
+      message: "You can't get the list of reported reviews",
+    });
+    return;
+  }
+
   Reviews.findAll()
     .then((reviews) => {
       res.status(200).json(reviews.length);

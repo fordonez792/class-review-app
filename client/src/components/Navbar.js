@@ -21,30 +21,28 @@ import { navbarTranslations } from "../assets/componentsTranslations";
 import { useLanguageContext } from "../context/LanguageContext";
 import { useSearchContext } from "../context/SearchContext";
 import { useAuthStateContext } from "../context/AuthStateContext";
+import { useScreenSizeContext } from "../context/ScreenSizeContext";
+
+// Navbar that allows for users to navigate website easily
+// If logged in, user can access their account, write a review page, chatbot, search through courses with a searchbar and search courses by choosing a college and department, as well as logout
+// If not logged in, users can still access the chatbot, login and signup page, and search a course with both typing in searchbar, or choosing college and department
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const { language } = useLanguageContext();
   const { authState, logOut } = useAuthStateContext();
   const { isSearchOpen, setIsSearchOpen } = useSearchContext();
+  const { isTablet, isDesktop } = useScreenSizeContext();
+
   const [isOpen, setIsOpen] = useState(false);
-  const [isTablet, setIsTablet] = useState(window.innerWidth > 767);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
   const [navSearch, setNavSearch] = useState("");
+
   const accountMenuRef = useRef();
   const searchbarRef = useRef();
 
-  const updateState = () => {
-    setIsTablet(window.innerWidth > 767);
-    setIsDesktop(window.innerWidth > 1199);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
-
+  // Opens menu if screen is mobile or tablet
   const openAccountMenu = () => {
     if (!accountMenuRef.current) return;
     if (!accountMenuRef.current?.classList?.contains("active")) {
@@ -54,6 +52,7 @@ const Navbar = () => {
     }
   };
 
+  // Closes menu if screen is mobile or tablet
   const closeAccountMenu = (e) => {
     if (!e.target) return;
     if (
@@ -67,22 +66,26 @@ const Navbar = () => {
     }
   };
 
+  // Searchbar appears after user scrolls past home page searchbar if screen is desktop
   const activateSearchbar = () => {
     if (!searchbarRef.current) return;
     if (window.scrollY > 350) searchbarRef.current?.classList?.add("active");
     else searchbarRef.current?.classList?.remove("active");
   };
 
+  // Goes to home page and closes the search page
   const navigateHome = () => {
     setIsSearchOpen(false);
     navigate("/");
   };
 
+  // Closes the search page if it is open and opens the colleges menu / side menu
   const openSideMenu = () => {
     setIsSearchOpen(false);
     setIsOpen(true);
   };
 
+  // Activates both the close menu when clicking anywhere but the menu on both tablet and mobile and the searchbar function on desktop
   useEffect(() => {
     if (!searchbarRef.current) return;
     !isDesktop && document.addEventListener("click", closeAccountMenu);
@@ -99,6 +102,7 @@ const Navbar = () => {
     };
   }, [location.pathname]);
 
+  // Adds the searchbar automatically on the screen if it is not write-review page or home page
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/write-review")
       return;
@@ -106,6 +110,7 @@ const Navbar = () => {
     searchbarRef.current?.classList?.add("active");
   }, []);
 
+  // Applies focus to the searchbar if we click on the home page searchbar
   useEffect(() => {
     if (!searchbarRef.current) return;
     if (isSearchOpen) searchbarRef.current.children[1].focus();

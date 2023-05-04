@@ -2,6 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 
 export const LanguageContext = React.createContext();
 
+// Controls the language displayed for the whole website, can only be changed by choosing a different language on the footer of the webiste
+// Language state used in all pages to determine which language to be displayed
+
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(
     localStorage.getItem("language") || "English"

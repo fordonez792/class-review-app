@@ -8,6 +8,9 @@ const { getTranslation } = require("../services/Translation");
 
 const router = express.Router();
 
+// This file contains all routes that have to do with departments
+// This include posting departments, exclusive for the admin, as well as finding departments by id and english or chinese name, as well as getting all departments in the db and also all departments belonging to a college
+
 const getCollegesId = async () => {
   const collegesId = await Colleges.findAll({
     attributes: ["collegeId"],
@@ -24,6 +27,7 @@ const getDepartments = (year, collegeId) => {
     .then((res) => res.data);
 };
 
+// Allows for all departments to be posted, exclusive for the admin
 router.post("/post", authenticateToken, async (req, res) => {
   const user = await Users.findOne({ where: { id: req.user.id } });
   if (!user.admin || user.username !== "admin") {

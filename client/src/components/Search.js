@@ -8,25 +8,24 @@ import useDebounce from "../hooks/useDebounce";
 
 import { searchTranslations } from "../assets/componentsTranslations";
 import { useLanguageContext } from "../context/LanguageContext";
+import { useScreenSizeContext } from "../context/ScreenSizeContext";
 import { getCoursesByNameOrId, getPopularCourses } from "../api/coursesApi";
+
+// Search that allows users to search db courses by chinese name, course code, or english name
+// If nothing is typed it displays the top 5 most popular courses at the time
+// After 3 characters are typed then it returns first 10 results for the string matches in the db
+// On Click of any of the single courses will redirect the user to the course specific page
+// User can also view all the search results in the search results page by clicking on the option
 
 const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
   const navigate = useNavigate();
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const searchbarRef = useRef();
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
   const [search, setSearch] = useState(navSearch || "");
   const debouncedValue = useDebounce(search, 1000);
 
-  const updateState = () => {
-    setIsDesktop(window.innerWidth > 1199);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
-
+  // Fetches the top 5 most popular courses at the moment
   const popular = useQuery(["popularCourses"], () => getPopularCourses());
 
   // Fetch courses with function defined in coursesApi file
@@ -35,22 +34,26 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
     () => debouncedValue.length > 2 && getCoursesByNameOrId(debouncedValue)
   );
 
+  // On click of a course navigates to the course specific page, navigate: true allows for visited column in db to be updated
   const navigateCourse = (courseId) => {
     setIsSearchOpen(false);
     setSearch("");
     navigate(`/course/${courseId}`, { state: { navigate: true } });
   };
 
+  // If clicked on view all results then navigate to the search results page
   const navigateSearchResults = (search) => {
     setIsSearchOpen(false);
     setSearch("");
     navigate(`/search/${search}`);
   };
 
+  // Apply focus to the searchbar once the search window is open
   useEffect(() => {
     searchbarRef.current.focus();
   }, [isSearchOpen]);
 
+  // Specifically for desktop, makes the search term same as the one found on the navbar searchbar
   useEffect(() => {
     setSearch(navSearch);
   }, [navSearch]);

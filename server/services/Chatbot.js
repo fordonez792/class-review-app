@@ -2,6 +2,9 @@ require("dotenv").config();
 const CREDENTIALS = require("../DialogflowCredentials.json");
 const dialogflow = require("@google-cloud/dialogflow");
 
+// This file connects the server to dialogflow where the chatbot was created and trained
+// It also contains the main function to facilitate communication between the user and the chatbot
+
 const CONFIGURATION = {
   credentials: {
     private_key: CREDENTIALS.private_key,
@@ -11,6 +14,7 @@ const CONFIGURATION = {
 
 const sessionClient = new dialogflow.SessionsClient(CONFIGURATION);
 
+// Detects the message that was sent to the chatbot and retrieves a response from the chatbot
 const detectIntent = async (languageCode, queryText, sessionId) => {
   let sessionPath = sessionClient.projectAgentSessionPath(
     CREDENTIALS.project_id,

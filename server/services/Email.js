@@ -2,6 +2,9 @@ require("dotenv").config();
 
 const nodemailer = require("nodemailer");
 
+// This file contains all sending email functions
+// Within are email to admin when a review has been reported 10 times, and email to verify a users email address
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
@@ -12,10 +15,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Sends email to admin when a review has reached 10 report votes, admin can then be notified and moderate the reviews
 const verifyReportedReview = (reviewId) => {
   const emailOptions = {
     from: process.env.EMAIL,
-    to: "fordonez792@gmail.com",
+    to: process.env.ADMIN_EMAIL,
     subject: "Reported Review",
     html: `<p>Review with id: ${reviewId} has reached 10 report votes. Please check the review and decide if it should be deleted.</p>`,
   };
@@ -26,6 +30,7 @@ const verifyReportedReview = (reviewId) => {
   });
 };
 
+// Sends email to user that is creating an account, so that they can verify their email address
 const verifyEmail = (id, email, token) => {
   const url = "http://localhost:3000/";
 

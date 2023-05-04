@@ -1,3 +1,5 @@
+// Includes the translations for the signup folder and the files inside it
+
 export const signupTranslations = [
   {
     id: 1,

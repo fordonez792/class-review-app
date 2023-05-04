@@ -1,3 +1,5 @@
+// This file includes the translations for both english and chinese for the home folder and its file
+
 export const homeTranslations = [
   {
     id: 1,

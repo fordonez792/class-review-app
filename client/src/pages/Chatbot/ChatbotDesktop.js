@@ -6,10 +6,15 @@ import { chatbotTranslations } from "./chatbotTranslations";
 
 import Chatbot from "./Chatbot";
 
-const ChatbotDesktop = ({ isDesktop }) => {
+// The container for the chatbot when the screen is desktop size
+// This container is visible in most of the pages of the website, on click it opens the chatbot and user can start interacting with it
+// User also has the option of closing the chatbot and reseting the chat
+
+const ChatbotDesktop = () => {
   const { language } = useLanguageContext();
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
+  // Closes the message that asks the user if they need help
   const closeMessage = (e) => {
     e.target.parentElement.style.display = "none";
   };
@@ -36,9 +41,7 @@ const ChatbotDesktop = ({ isDesktop }) => {
           </p>
         </article>
       )}
-      {isChatbotOpen && (
-        <Chatbot isDesktop={isDesktop} setIsChatbotOpen={setIsChatbotOpen} />
-      )}
+      {isChatbotOpen && <Chatbot setIsChatbotOpen={setIsChatbotOpen} />}
     </>
   );
 };

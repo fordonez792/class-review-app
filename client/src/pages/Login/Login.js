@@ -13,6 +13,12 @@ import { useAuthStateContext } from "../../context/AuthStateContext";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { loginTranslations } from "./loginTranslations";
 
+// This is the login page for users
+// Allows for login using google verification services as well as local accounts
+// If user wants to log in regardless of the method, ndhu email address must be used, only ndhu students are allowed to create accounts in this website
+// If user signed up locally but never verified their email address, they must verify it before they can be logged in
+// Users can also navigate to the sign up page to create an account locally if they prefer
+
 const Login = () => {
   const { language } = useLanguageContext();
   const { setAuthState, googleSignIn } = useAuthStateContext();
@@ -30,10 +36,13 @@ const Login = () => {
     else setField("USERNAME");
   }, [usernameOrEmail]);
 
+  // Resets the error message after 10 seconds
   useEffect(() => {
     setTimeout(() => setError(""), 10000);
   }, [error, setError]);
 
+  // Handles google sign in allowing only for ndhu email domains and then passing data to server to add a user to db
+  // Returns an access token that is later used to persist the login and verify the user
   const handleGoogleSignIn = (e) => {
     e.preventDefault();
     setError({
@@ -90,6 +99,7 @@ const Login = () => {
       .catch((error) => console.log(error));
   };
 
+  // Handles local account login, after data is verified with server, user can proceed logged in, if user never verified their email, another email will be sent so they can verify
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -183,13 +193,6 @@ const Login = () => {
                 {viewPassword ? <FaRegEyeSlash /> : <FaRegEye />}
               </div>
             </div>
-            {/* <div className="forgot-password">
-              <h2>
-                {language === "English"
-                  ? loginTranslations[3].english
-                  : language === "Chinese" && loginTranslations[3].chinese}
-              </h2>
-            </div> */}
             <button type="submit" onSubmit={(e) => handleSubmit(e)}>
               {language === "English"
                 ? loginTranslations[0].english

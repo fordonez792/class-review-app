@@ -1,3 +1,6 @@
+// This file contains all translations for the colleges and departments from chinese to english
+// Allows both tables to contain both accurate english and chinese names
+
 const getTranslation = (name, is) => {
   let englishName = "";
   // Translate college name to english

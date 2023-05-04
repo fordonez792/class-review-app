@@ -1,3 +1,5 @@
+// Translations for the chatbot in both english and chinese
+
 export const chatbotTranslations = [
   {
     id: 1,

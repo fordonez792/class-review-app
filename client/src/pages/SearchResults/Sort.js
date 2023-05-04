@@ -5,17 +5,23 @@ import { TbArrowsSort } from "react-icons/tb";
 import { searchSort } from "../../assets/sort";
 import { sortTranslations } from "./searchResultsTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+
+// This is the sort page for the search results page for sorting the courses
+// Allows users to sort reviews by default, courses with most reviews first, highest rated courses first, and most popular courses first
+// If users are in mobile or tablet users must select and then apply the sorts for courses to be sorted
+// If users are in desktop just selecting is enough, sorts will be applied automatically
 
 const Sort = ({
   isSortOpen,
   setIsSortOpen,
   selectedSort,
   setSelectedSort,
-  isDesktop,
   setPageNumber,
   className,
 }) => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const formRef = useRef();
   const dropdownRef = useRef();
   const [tempSort, setTempSort] = useState(selectedSort);
@@ -26,7 +32,7 @@ const Sort = ({
     setSelectedSort({ ...tempSort, saved: true });
     setIsSortOpen(false);
   };
-
+  // Handles closing the sort page, and doesn't save any sorting method if it was not applied
   const closeSort = () => {
     if (!selectedSort.saved) {
       setSelectedSort({ ...selectedSort });
@@ -50,6 +56,7 @@ const Sort = ({
     }
   };
 
+  // If it is desktop then after selecting a sort immediately sort the results instead of pressing apply button like in the mobile and tablet view
   useEffect(() => {
     if (isDesktop) applySort();
   }, [tempSort]);
@@ -65,6 +72,7 @@ const Sort = ({
     });
   }, [isSortOpen]);
 
+  // Opens dropdown when clicking on the input, only for desktop
   const openDropdown = (e) => {
     if (!isDesktop) return;
     if (!e.target.id === "sort" && !e.target?.classList.contains("icon"))

@@ -14,29 +14,22 @@ import useDebounce from "../../hooks/useDebounce";
 
 import { courseTranslations } from "./courseTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
 import { getReviews } from "../../api/reviewsApi";
 import { increaseVisited, getCourseById } from "../../api/coursesApi";
 
+// The course specific page, divided into 3 sections, 3 files for better organization
+// Being the main file it contains all the states for the filtering and sorting of the reviews, and the querying for the course information and reviews is also done here
+// From here the user can write a review for this course as well as read reviews and information about the course itself, as well as the rating given to this course by other users in different criterias
+
 const Course = () => {
   const { language } = useLanguageContext();
+  const { isTablet, isDesktop } = useScreenSizeContext();
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const debouncedValue = useDebounce(search, 1000);
-
-  const [isTablet, setIsTablet] = useState(window.innerWidth > 767);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
-
-  const updateState = () => {
-    setIsTablet(window.innerWidth > 767);
-    setIsDesktop(window.innerWidth > 1199);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateState);
-    return () => window.removeEventListener("resize", updateState);
-  });
 
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState({

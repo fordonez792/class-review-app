@@ -1,3 +1,5 @@
+// Contains all translations for both english and chinese for the Course folder and all its files
+
 export const courseTranslations = [
   {
     id: 1,

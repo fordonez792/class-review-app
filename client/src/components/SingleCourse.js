@@ -6,6 +6,9 @@ import { useAuthStateContext } from "../context/AuthStateContext";
 import { useLanguageContext } from "../context/LanguageContext";
 import { searchResultsTranslations } from "../pages/SearchResults/searchResultsTranslations";
 
+// The main way in which single courses are displayed throughout the website, something like course cards
+// It provides main information on a single course, and 2 ways to navigate to the course specific page, and 1 way to write a review for the chosen course
+
 const SingleCourse = ({
   courseId,
   courseEnglishName,
@@ -20,8 +23,6 @@ const SingleCourse = ({
   const { authState } = useAuthStateContext();
   const { language } = useLanguageContext();
   const navigate = useNavigate();
-
-  console.log(time);
 
   return (
     <article id="single-course" className={className}>

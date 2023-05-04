@@ -6,6 +6,9 @@ import { FaTimes, FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import { useLanguageContext } from "../context/LanguageContext";
 import { getDepartments } from "../api/coursesApi";
 
+// The second level of the sidemenu specifically for departments within the college that was chosen on the first sidemenu
+// Displays all departments of that college, and on click redirects to the search results page displaying all courses for that department
+
 const SecondLevelSideMenu = ({
   selectedCollege,
   isOpen,

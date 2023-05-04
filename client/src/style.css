@@ -4256,6 +4256,10 @@ button:hover {
     height: 120px;
     width: 120px;
   }
+  #account .profile .picture {
+    height: 120px;
+    width: 120px;
+  }
   #account .profile img {
     height: 120px;
     width: 120px;

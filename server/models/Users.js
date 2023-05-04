@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  // Connects this table to the helpfulvotes and reportvotes tables
   Users.associate = (models) => {
     Users.hasMany(models.HelpfulVotes, {
       onDelete: "cascade",

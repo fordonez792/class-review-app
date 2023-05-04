@@ -5,16 +5,22 @@ import { TbArrowsSort } from "react-icons/tb";
 import { reviewSort } from "../../assets/sort";
 import { sortTranslations } from "./courseTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+
+// This is the sort page for the course specific page for sorting the reviews of that course
+// Allows users to sort reviews by default, newest first, reviews with most helpful votes first, reviews with highest rating first, and reviews with lowest rating first
+// If users are in mobile or tablet users must select and then apply the sorts for courses to be sorted
+// If users are in desktop just selecting is enough, sorts will be applied automatically
 
 const Sort = ({
   isSortOpen,
   setIsSortOpen,
   selectedSort,
   setSelectedSort,
-  isDesktop,
   className,
 }) => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const formRef = useRef();
   const dropdownRef = useRef();
   const [tempSort, setTempSort] = useState(selectedSort);
@@ -25,6 +31,7 @@ const Sort = ({
     setIsSortOpen(false);
   };
 
+  // Handles closing the sort page, and doesn't save any sorting method if it was not applied
   const closeSort = () => {
     if (!selectedSort.saved) {
       setSelectedSort({ ...selectedSort });
@@ -58,6 +65,7 @@ const Sort = ({
     });
   }, [isSortOpen]);
 
+  // Opens dropdown when clicking on the input, only for desktop
   const openDropdown = (e) => {
     if (!isDesktop) return;
     if (!e.target.id === "sort" && !e.target?.classList.contains("icon"))
@@ -84,6 +92,7 @@ const Sort = ({
     return () => document.removeEventListener("click", closeDropdown);
   }, []);
 
+  // If it is desktop then after selecting a sort immediately sort the results instead of pressing apply button like in the mobile and tablet view
   useEffect(() => {
     if (isDesktop) applySort();
   }, [tempSort]);

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Allows user to give a helpful vote a review and store in db
 export const voteReview = ({ id }) => {
   return axios
     .post(
