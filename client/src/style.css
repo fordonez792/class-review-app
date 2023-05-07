@@ -1251,10 +1251,18 @@ button:hover {
   margin-top: 20px;
   color: var(--white);
 }
-#footer .language .paragraph::after {
+#footer .language a.paragraph {
+  margin-top: 0;
+  margin-bottom: 10px;
+  width: auto;
+  color: var(--bright-blue);
+  text-decoration: underline;
+  cursor: pointer;
+}
+#footer .language p:last-child::after {
   content: "";
   position: absolute;
-  bottom: -16px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
   height: 2px;

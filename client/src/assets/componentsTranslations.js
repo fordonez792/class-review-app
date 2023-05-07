@@ -61,6 +61,11 @@ export const footerTranslations = [
     chinese:
       "此網站版本主要設計給中文為第一語言者，如果需要請在上方選擇與語言。",
   },
+  {
+    id: 3,
+    english: "NDHU Reviews User Satisfaction Questionnaire",
+    chinese: "NDHU Reviews 用戶滿意度問卷",
+  },
 ];
 export const sideMenuTranslations = [
   {

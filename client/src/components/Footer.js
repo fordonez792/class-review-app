@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { HiLanguage } from "react-icons/hi2";
 import { FaChevronDown } from "react-icons/fa";
 
@@ -10,6 +11,7 @@ import { useLanguageContext } from "../context/LanguageContext";
 
 const Footer = () => {
   const { language, chooseLanguage } = useLanguageContext();
+  const navigate = useNavigate();
   const dropdownRef = useRef();
 
   // Opens the dropdown when clicking on the input
@@ -80,6 +82,15 @@ const Footer = () => {
                 ? footerTranslations[1].english
                 : language === "Chinese" && footerTranslations[1].chinese}
             </p>
+            <a
+              className="paragraph"
+              href="https://forms.gle/LcYrHyVzKxZ1bc6RA"
+              target="_blank"
+            >
+              {language === "English"
+                ? footerTranslations[2].english
+                : language === "Chinese" && footerTranslations[2].chinese}
+            </a>
             <p>© NDHU Reviews {new Date().getFullYear()}</p>
           </article>
         </footer>
