@@ -215,7 +215,7 @@ button:hover {
   all: unset;
   position: absolute;
   padding: 10px;
-  padding-left: 40px;
+  padding-left: 50px;
   height: 20px;
 }
 .clear {
@@ -297,6 +297,9 @@ button:hover {
     width: calc(250px * 1.1);
     padding-left: calc(37px * 1.1);
     padding-right: calc(20px * 1.1);
+  }
+  .searchbar input {
+    padding-left: 10;
   }
   .dropdown .input-field {
     padding-left: calc(15px * 1.1);
