@@ -215,6 +215,7 @@ button:hover {
   all: unset;
   position: absolute;
   padding: 10px;
+  padding-left: 30px;
   height: 20px;
 }
 .clear {
