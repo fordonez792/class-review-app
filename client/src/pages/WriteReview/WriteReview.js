@@ -9,6 +9,7 @@ import ReviewInfo from "./ReviewInfo";
 import { criteria } from "../../assets/criteria";
 import { writeReviewTranslations } from "./writeReviewTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useAuthStateContext } from "../../context/AuthStateContext";
 import { postReview } from "../../api/reviewsApi";
 
 // This is the main page of the writing a review page
@@ -19,6 +20,7 @@ import { postReview } from "../../api/reviewsApi";
 
 const WriteReview = () => {
   const { language } = useLanguageContext();
+  const { authState } = useAuthStateContext();
   const navigate = useNavigate();
   const { id } = useParams();
   const [courseId, setCourseId] = useState(id);
@@ -166,10 +168,9 @@ const WriteReview = () => {
   // Prevents users that are not logged in from coming to this page
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-      return;
+      navigate("/");
     }
-  }, []);
+  }, [authState]);
 
   return (
     <section id="write-review">

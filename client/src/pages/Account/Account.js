@@ -12,6 +12,7 @@ import { getAccount } from "../../api/usersApi";
 import { accountTranslations } from "./accountTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+import { useAuthStateContext } from "../../context/AuthStateContext";
 
 // This is the Account page, displays the main information for a user, username, photo if one, number of contributions, and number of helpful votes received in all their reviews
 // Also all their reviews will be displayed in this page, with the option of navigating to the specific course page that a review belongs to
@@ -19,6 +20,7 @@ import { useScreenSizeContext } from "../../context/ScreenSizeContext";
 const Account = () => {
   const { language } = useLanguageContext();
   const { isDesktop } = useScreenSizeContext();
+  const { authState } = useAuthStateContext();
   const navigate = useNavigate();
 
   // Gets the account information including the information specific to the user logged in, as well as all the reviews this user has written
@@ -31,10 +33,9 @@ const Account = () => {
   // Prevents users that are not logged in from coming to this page
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      navigate("/login");
-      return;
+      navigate("/");
     }
-  }, []);
+  }, [authState]);
 
   return (
     <section id="account">

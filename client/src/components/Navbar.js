@@ -188,7 +188,7 @@ const Navbar = () => {
                 </div>
               )}
               <ul className="right">
-                {authState.loggedIn && localStorage.getItem("accessToken") ? (
+                {authState?.loggedIn && localStorage.getItem("accessToken") ? (
                   <>
                     {!isDesktop && (
                       <li
@@ -362,7 +362,7 @@ const Navbar = () => {
                 </button>
               </article>
               <ul className="account-menu" ref={accountMenuRef}>
-                {authState.loggedIn && localStorage.getItem("accessToken") ? (
+                {authState?.loggedIn && localStorage.getItem("accessToken") ? (
                   <>
                     <li
                       className="account-option"

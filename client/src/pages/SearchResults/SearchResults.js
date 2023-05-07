@@ -59,32 +59,13 @@ const SearchResults = () => {
     taughtInEnglish: null,
     fall: null,
     spring: null,
-    courseLevel: [],
-    time: [],
+    courseLevel: chatbotCourseLevel.find((str) => str === filter)
+      ? [filter]
+      : [],
+    time: chatbotTime.find((str) => str === filter) ? [filter] : [],
     rating: null,
     saved: false,
   });
-
-  // departmentId and search remain with previous values, so need to update
-  useEffect(() => {
-    if (departmentId) setSelectedFilters({ ...selectedFilters, departmentId });
-    if (search) setSelectedFilters({ ...selectedFilters, search });
-    if (chatbotRatings.find((str) => str === filter))
-      setSelectedFilters({ ...selectedFilters, rating: filter });
-    else if (chatbotCourseLevel.find((str) => str === filter)) {
-      setSelectedFilters({
-        ...selectedFilters,
-        courseLevel: [...selectedFilters.courseLevel, filter],
-        saved: true,
-      });
-    } else if (chatbotTime.find((str) => str === filter)) {
-      setSelectedFilters({
-        ...selectedFilters,
-        time: [...selectedFilters.time, filter],
-        saved: true,
-      });
-    }
-  }, [departmentId, search, filter]);
 
   // Fetch courses with function defined in coursesApi file, either by departmentID or the search query
   const courses = useQuery(
@@ -125,6 +106,8 @@ const SearchResults = () => {
       saved: false,
     });
   };
+
+  // useEffect(() => console.log("selected", selectedFilters), [selectedFilters]);
 
   // Variables to control the pagination done
   const [pageNumber, setPageNumber] = useState(0);

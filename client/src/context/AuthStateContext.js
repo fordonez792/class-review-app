@@ -18,8 +18,8 @@ export const AuthStateProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
-    loggedIn: false,
-    admin: false,
+    loggedIn: null,
+    admin: null,
   });
 
   useEffect(() => {
@@ -35,7 +35,12 @@ export const AuthStateProvider = ({ children }) => {
             // If not google then, user is not logged int
             if (!res) {
               localStorage.removeItem("accessToken");
-              setAuthState({ username: "", id: 0, loggedIn: false });
+              setAuthState({
+                username: "",
+                id: 0,
+                loggedIn: false,
+                admin: false,
+              });
               return;
             }
             setAuthState({

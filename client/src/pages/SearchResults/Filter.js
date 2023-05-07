@@ -24,6 +24,11 @@ const Filter = ({
   const { isDesktop } = useScreenSizeContext();
   const [tempFilters, setTempFilters] = useState(selectedFilters);
 
+  useEffect(() => {
+    console.log("selected", selectedFilters);
+    console.log("temp", tempFilters);
+  }, []);
+
   // Refetch the data according to the filters selected
   const applyFilters = () => {
     setPageNumber(0);
@@ -201,8 +206,8 @@ const Filter = ({
                             (option.display === "Spring" ||
                               option.displayChinese === "春季學期") &&
                             "active") ||
-                          (courseLevel.includes(option.value) && "active") ||
-                          (time.includes(option.value) && "active")
+                          (courseLevel?.includes(option.value) && "active") ||
+                          (time?.includes(option.value) && "active")
                         }`}
                       >
                         {language === "English"

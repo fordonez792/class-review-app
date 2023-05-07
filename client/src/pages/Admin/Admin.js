@@ -43,11 +43,8 @@ const Admin = () => {
 
   // Only allows for the admin to navigate to this page, if not admin then redirected to the home page
   useEffect(() => {
-    if (!authState) return;
     if (!localStorage.getItem("accessToken")) navigate("/");
-    if (authState.id === 0 || authState.username === "") navigate("/");
-    if (!authState.admin) navigate("/");
-  }, [authState, authState.admin]);
+  }, [authState]);
 
   return (
     <section id="admin">

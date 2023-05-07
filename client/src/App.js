@@ -15,12 +15,17 @@ import Course from "./pages/Course/Course";
 import Account from "./pages/Account/Account";
 import Admin from "./pages/Admin/Admin";
 
+import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute";
+import ProtectedRouteAdmin from "./ProtectedRoutes/ProtectedRouteAdmin";
+
 import { useScreenSizeContext } from "./context/ScreenSizeContext";
+import { useAuthStateContext } from "./context/AuthStateContext";
 
 // This file contains all the routes for this website
 
 const App = () => {
   const { isDesktop } = useScreenSizeContext();
+  const { authState } = useAuthStateContext();
 
   return (
     <Router>
@@ -33,11 +38,42 @@ const App = () => {
             path="/search/:departmentID/:collegeID/:filter"
             element={<SearchResults />}
           />
-          <Route path="/write-review" element={<WriteReview />} />
-          <Route path="/write-review/:id" element={<WriteReview />} />
+          <Route
+            path="/write-review"
+            element={
+              <ProtectedRoute loggedIn={authState.loggedIn}>
+                <WriteReview />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/write-review/:id"
+            element={
+              <ProtectedRoute loggedIn={authState.loggedIn}>
+                <WriteReview />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/course/:id" element={<Course />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute loggedIn={authState.loggedIn}>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRouteAdmin
+                loggedIn={authState.loggedIn}
+                admin={authState.admin}
+              >
+                <Admin />
+              </ProtectedRouteAdmin>
+            }
+          />
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
