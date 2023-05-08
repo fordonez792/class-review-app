@@ -113,6 +113,7 @@ const Navbar = () => {
   // Applies focus to the searchbar if we click on the home page searchbar
   useEffect(() => {
     if (!searchbarRef.current) return;
+    if (!isSearchOpen) searchbarRef.current.children[1].blur();
     if (isSearchOpen) searchbarRef.current.children[1].focus();
   }, [isSearchOpen]);
 

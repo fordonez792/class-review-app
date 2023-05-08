@@ -36,6 +36,7 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
 
   // On click of a course navigates to the course specific page, navigate: true allows for visited column in db to be updated
   const navigateCourse = (courseId) => {
+    searchbarRef.current.blur();
     setIsSearchOpen(false);
     setSearch("");
     navigate(`/course/${courseId}`, { state: { navigate: true } });
@@ -43,6 +44,7 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
 
   // If clicked on view all results then navigate to the search results page
   const navigateSearchResults = (search) => {
+    searchbarRef.current.blur();
     setIsSearchOpen(false);
     setSearch("");
     navigate(`/search/${search}`);
@@ -50,7 +52,7 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
 
   // Apply focus to the searchbar once the search window is open
   useEffect(() => {
-    searchbarRef.current.focus();
+    if (isSearchOpen) searchbarRef.current.focus();
   }, [isSearchOpen]);
 
   // Specifically for desktop, makes the search term same as the one found on the navbar searchbar
