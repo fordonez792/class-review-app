@@ -903,6 +903,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   position: fixed;
+  min-height: 10%;
   height: 10%;
   width: 100%;
   overflow-y: visible;
