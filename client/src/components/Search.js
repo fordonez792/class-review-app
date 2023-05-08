@@ -69,7 +69,19 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
         ></div>
       )}
       <div className="container">
-        <form className="searchbar">
+        <form
+          className="searchbar"
+          onKeyDown={(e) => {
+            if (
+              e.key === "Enter" &&
+              debouncedValue.toString().length > 2 &&
+              courses.status === "success"
+            ) {
+              e.preventDefault();
+              navigateSearchResults(debouncedValue);
+            }
+          }}
+        >
           <label>
             <FaSearch />
           </label>
