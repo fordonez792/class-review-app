@@ -74,9 +74,10 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
           onKeyDown={(e) => {
             if (
               e.key === "Enter" &&
-              debouncedValue.toString().length > 2 &&
+              debouncedValue.length > 2 &&
               courses.status === "success"
             ) {
+              if (!debouncedValue) return;
               e.preventDefault();
               navigateSearchResults(debouncedValue);
             }
