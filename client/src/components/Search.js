@@ -83,7 +83,7 @@ const Search = ({
         <form
           className="searchbar"
           onKeyDown={(e) => {
-            e.preventDefault();
+            if (e.key === "Enter") e.preventDefault();
             if (
               e.key === "Enter" &&
               debouncedValue.length > 2 &&
