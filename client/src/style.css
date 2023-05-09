@@ -2210,6 +2210,7 @@ button:hover {
 }
 #filter-modal .single-filter {
   overflow: hidden;
+  height: auto;
   width: 100%;
 }
 #filter-modal .single-filter .header {
