@@ -260,7 +260,6 @@ const Chatbot = ({ setIsChatbotOpen }) => {
         <div
           className="close-btn"
           onClick={() => {
-            console.log(isDesktop);
             if (isDesktop) {
               setIsChatbotOpen(false);
             } else {

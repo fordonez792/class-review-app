@@ -52,7 +52,6 @@ export const AuthStateProvider = ({ children }) => {
             res
               .getIdToken()
               .then((accessToken) => {
-                console.log(accessToken);
                 localStorage.setItem("accessToken", accessToken);
               })
               .catch((error) => console.log(error));

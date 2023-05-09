@@ -24,11 +24,6 @@ const Filter = ({
   const { isDesktop } = useScreenSizeContext();
   const [tempFilters, setTempFilters] = useState(selectedFilters);
 
-  useEffect(() => {
-    console.log("selected", selectedFilters);
-    console.log("temp", tempFilters);
-  }, []);
-
   // Refetch the data according to the filters selected
   const applyFilters = () => {
     setPageNumber(0);

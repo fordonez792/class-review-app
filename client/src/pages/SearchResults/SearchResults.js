@@ -107,8 +107,6 @@ const SearchResults = () => {
     });
   };
 
-  // useEffect(() => console.log("selected", selectedFilters), [selectedFilters]);
-
   // Variables to control the pagination done
   const [pageNumber, setPageNumber] = useState(0);
   const resultsPerPage = 10;

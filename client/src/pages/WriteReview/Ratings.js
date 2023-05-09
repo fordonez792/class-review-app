@@ -46,10 +46,6 @@ const Ratings = ({ ratings, setRatings }) => {
         const stars = child.children[1];
         // const p = child.lastChild;
         Array.from(stars.children).forEach((star) => {
-          console.log(
-            star.id,
-            `${ratings[index].name.english}-star-${ratings[index].selection}`
-          );
           if (
             star.id ===
             `${ratings[index].name.english}-star-${ratings[index].selection}`
