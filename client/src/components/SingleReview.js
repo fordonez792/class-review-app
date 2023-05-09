@@ -54,6 +54,8 @@ const SingleReview = ({
   const menuRef = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  console.log(authState.username, username);
+
   // Set the amount of time since posted
   const updated = new Date(createdAt);
   const today = new Date();

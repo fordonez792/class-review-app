@@ -4042,6 +4042,8 @@ button:hover {
   font-size: 1.5rem;
   margin: 20px 0;
   text-transform: capitalize;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 #single-review .review-info .description {
   padding: 10px;
@@ -5263,7 +5265,6 @@ button:hover {
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   }
   #home .popular .popular-courses #single-course .header {
-    
     max-width: 90%;
   }
   #home .popular .popular-courses #single-course .header h1 {
