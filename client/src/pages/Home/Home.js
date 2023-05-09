@@ -13,6 +13,7 @@ import Footer from "../../components/Footer";
 import ChatbotDesktop from "../Chatbot/ChatbotDesktop";
 import Loading from "../../components/Loading";
 
+import dakeza2 from "../../assets/dakeza-climbing.jpg";
 import dakeza from "../../assets/dakeza_big_group.jpg";
 import reviewPic from "../../assets/review_pic.jpg";
 import robotPic from "../../assets/robot_pic.jpg";
@@ -215,7 +216,7 @@ const Home = () => {
             </h1>
           </div>
           <div className="picture">
-            <img src={reviewPic} alt="" />
+            <img src={dakeza2} alt="" />
           </div>
           <div className="paragraph">
             <p>
