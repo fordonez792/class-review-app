@@ -15,6 +15,7 @@ import useDebounce from "../../hooks/useDebounce";
 import { courseTranslations } from "./courseTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+import { useAuthStateContext } from "../../context/AuthStateContext";
 import { getReviews } from "../../api/reviewsApi";
 import { increaseVisited, getCourseById } from "../../api/coursesApi";
 
@@ -23,6 +24,7 @@ import { increaseVisited, getCourseById } from "../../api/coursesApi";
 // From here the user can write a review for this course as well as read reviews and information about the course itself, as well as the rating given to this course by other users in different criterias
 
 const Course = () => {
+  const { authState } = useAuthStateContext();
   const { language } = useLanguageContext();
   const { isTablet, isDesktop } = useScreenSizeContext();
   const { id } = useParams();
@@ -101,15 +103,18 @@ const Course = () => {
                       : language === "Chinese" &&
                         course?.data.Department.departmentName}
                   </h3>
-                  <button
-                    onClick={() =>
-                      navigate(`/write-review/${course?.data.courseId}`)
-                    }
-                  >
-                    {language === "English"
-                      ? courseTranslations[0].english
-                      : language === "Chinese" && courseTranslations[0].chinese}
-                  </button>
+                  {authState.loggedIn && (
+                    <button
+                      onClick={() =>
+                        navigate(`/write-review/${course?.data.courseId}`)
+                      }
+                    >
+                      {language === "English"
+                        ? courseTranslations[0].english
+                        : language === "Chinese" &&
+                          courseTranslations[0].chinese}
+                    </button>
+                  )}
                 </div>
               </article>
               <div className="desktop-container">
