@@ -5263,7 +5263,11 @@ button:hover {
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   }
   #home .popular .popular-courses #single-course .header {
+    
     max-width: 90%;
+  }
+  #home .popular .popular-courses #single-course .header h1 {
+    min-height: 60.8px;
   }
   #home .popular .popular-courses #single-course:first-child {
     margin-left: 30px;
