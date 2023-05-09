@@ -4966,8 +4966,6 @@ button:hover {
   border-color: var(--navy);
 }
 #home .recent-reviews #single-review {
-  align-self: stretch;
-  justify-content: space-between;
   position: absolute;
   width: 90vw !important;
   border-radius: 10px;
@@ -5006,6 +5004,7 @@ button:hover {
 }
 #home .recent-reviews #single-review .link {
   cursor: pointer;
+  min-height: 38.4px;
   color: var(--bright-blue);
 }
 #home .recent-reviews #single-review .link:hover {
