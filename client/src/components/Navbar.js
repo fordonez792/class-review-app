@@ -54,7 +54,6 @@ const Navbar = () => {
 
   // Closes menu if screen is mobile or tablet
   const closeAccountMenu = (e) => {
-    console.log(e.target);
     if (!e.target) return;
     if (
       e.target?.classList?.contains("account-option") ||
@@ -89,14 +88,14 @@ const Navbar = () => {
   // Activates both the close menu when clicking anywhere but the menu on both tablet and mobile and the searchbar function on desktop
   useEffect(() => {
     !isDesktop && document.addEventListener("click", closeAccountMenu);
-    if (!searchbarRef.current) return;
+    // if (!searchbarRef.current) return;
     location.pathname === "/" &&
       searchbarRef.current &&
       document.addEventListener("scroll", activateSearchbar);
 
     return () => {
       !isDesktop && document.removeEventListener("click", closeAccountMenu);
-      if (!searchbarRef.current) return;
+      // if (!searchbarRef.current) return;
       location.pathname === "/" &&
         searchbarRef.current &&
         document.removeEventListener("scroll", activateSearchbar);

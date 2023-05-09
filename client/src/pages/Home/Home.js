@@ -64,7 +64,13 @@ const Home = () => {
               ? homeTranslations[0].english
               : language === "Chinese" && homeTranslations[0].chinese}
           </p>
-          <form className="searchbar" onClick={() => setIsSearchOpen(true)}>
+          <form
+            className="searchbar"
+            onClick={() => {
+              setIsSearchOpen(true);
+              if (isDesktop) window.scrollTo({ top: 351, behavior: "smooth" });
+            }}
+          >
             <label>
               <FaSearch />
             </label>
@@ -77,7 +83,6 @@ const Home = () => {
                   : language === "Chinese" && homeTranslations[1].chinese
               }
               autoComplete="off"
-              onClick={() => window.scrollTo({ top: 351, behavior: "smooth" })}
             />
           </form>
         </article>

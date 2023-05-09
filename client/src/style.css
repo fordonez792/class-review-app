@@ -1323,7 +1323,11 @@ button:hover {
 }
 #search .container .searchbar {
   position: relative;
+  pointer-events: none;
   margin-top: 30px;
+}
+#search.active .container .searchbar {
+  pointer-events: all;
 }
 #search .container .popular .header {
   margin-bottom: 20px;
@@ -4893,6 +4897,9 @@ button:hover {
   top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+#home .container .searchbar input {
+  pointer-events: none;
 }
 #home .container .recent-reviews {
   display: flex;
