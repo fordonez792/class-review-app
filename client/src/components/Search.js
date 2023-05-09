@@ -52,6 +52,7 @@ const Search = ({
     searchbarRef.current.blur();
     setIsSearchOpen(false);
     setSearch("");
+    setNavSearchReady(false);
     navigate(`/search/${search}`);
   };
 
