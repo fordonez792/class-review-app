@@ -903,8 +903,8 @@ button:hover {
   align-items: center;
   justify-content: center;
   position: fixed;
-  min-height: 10%;
-  height: 10%;
+  min-height: 10vh;
+  height: 10vh;
   width: 100%;
   overflow-y: visible;
   z-index: 7;
@@ -2243,10 +2243,6 @@ button:hover {
 #filter-modal .single-filter ul li svg {
   margin-left: 5px;
 }
-/* #filter-modal .single-filter ul li:hover {
-  background-color: var(--dark-blue);
-  color: var(--dark-blue);
-} */
 #filter-modal .single-filter ul li.active {
   background-color: var(--dark-blue);
   color: var(--white);
