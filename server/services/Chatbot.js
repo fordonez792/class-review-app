@@ -34,7 +34,8 @@ const detectIntent = async (languageCode, queryText, sessionId) => {
     },
   };
   const response = await sessionClient.detectIntent(request);
-  const message = response[0].queryResult.fulfillmentText;
+  const message =
+    response[0].queryResult.fulfillmentText || "Sorry, can you say that again?";
   const parameters = response[0].queryResult.parameters.fields;
 
   return {
