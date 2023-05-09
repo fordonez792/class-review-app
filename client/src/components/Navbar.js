@@ -181,8 +181,8 @@ const Navbar = () => {
                         setIsOpen(false);
                       }}
                       onKeyDown={(e) => {
-                        e.preventDefault();
                         if (e.key === "Enter" && navSearchReady) {
+                          e.preventDefault();
                           navigateSearchResults(navSearch);
                         }
                       }}
