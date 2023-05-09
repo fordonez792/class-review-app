@@ -1623,6 +1623,7 @@ button:hover {
   #side-menu {
     position: fixed;
     top: 10%;
+    min-height: unset;
     background-color: transparent;
   }
   #side-menu.side-menu2 {
@@ -1651,6 +1652,7 @@ button:hover {
     left: 20%;
     right: 55%;
     top: 0;
+    min-height: unset;
     height: auto;
     width: auto;
     background-color: var(--white);
