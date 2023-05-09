@@ -3312,9 +3312,6 @@ button:hover {
   border-bottom: 2px solid var(--dark-gray);
   transition: 0.8s ease max-height;
 }
-#course .ratings {
-  overflow: visible;
-}
 #course .ratings .button,
 #course .course-info .button {
   position: absolute;
@@ -3798,6 +3795,7 @@ button:hover {
     display: none;
   }
   #course .ratings {
+    overflow: visible;
     margin-right: 20px;
   }
   #course .ratings .recommend p {
