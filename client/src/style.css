@@ -1509,7 +1509,7 @@ button:hover {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  min-height: 90vh;
+  min-height: 100vh;
 }
 #side-menu .go-back {
   position: absolute;
