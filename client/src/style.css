@@ -4993,8 +4993,9 @@ button:hover {
   opacity: 0;
 }
 #home .recent-reviews #single-review .review-info h1 {
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #home .recent-reviews #single-review .description {
   height: auto;
