@@ -12,17 +12,15 @@ const client = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={client}>
-      <AuthStateProvider>
-        <ScreenSizeProvider>
-          <LanguageProvider>
-            <SearchProvider>
-              <App />
-            </SearchProvider>
-          </LanguageProvider>
-        </ScreenSizeProvider>
-      </AuthStateProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={client}>
+    <AuthStateProvider>
+      <ScreenSizeProvider>
+        <LanguageProvider>
+          <SearchProvider>
+            <App />
+          </SearchProvider>
+        </LanguageProvider>
+      </ScreenSizeProvider>
+    </AuthStateProvider>
+  </QueryClientProvider>
 );
