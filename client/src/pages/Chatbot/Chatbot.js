@@ -142,7 +142,7 @@ const Chatbot = ({ setIsChatbotOpen }) => {
   // Handles sending a typed message to the chatbot and backend
   const sendResponse = (e) => {
     e.preventDefault();
-    console.log(e.target);
+    e.target.blur();
     setMessageList((prev) => [...prev, { message, author: "user" }]);
     setMessage("");
     resizeRef.current.textContent = "";
