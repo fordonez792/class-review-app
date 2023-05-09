@@ -190,9 +190,7 @@ const Navbar = () => {
                       }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") e.preventDefault();
-                        console.log("hi");
                         if (e.key === "Enter" && navSearchReady) {
-                          console.log("enter");
                           navigateSearchResults(navSearch);
                         }
                       }}
