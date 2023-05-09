@@ -2172,6 +2172,7 @@ button:hover {
   right: 0;
   top: 0;
   bottom: 0;
+  min-height: 100vh;
   background-color: var(--white);
   opacity: 0;
   transition: 0.3s ease opacity;
@@ -2311,6 +2312,7 @@ button:hover {
     right: 67%;
     top: 138.2px;
     height: auto;
+    min-height: unset;
     border-radius: 10px;
     bottom: unset;
     background-color: var(--white);
@@ -2459,6 +2461,7 @@ button:hover {
   right: 0;
   top: 0;
   bottom: 0;
+  min-height: 100vh;
   background-color: var(--white);
   opacity: 0;
   transition: 0.3s ease opacity;
@@ -2570,6 +2573,7 @@ button:hover {
     right: 50px;
     top: 0;
     bottom: unset;
+    min-height: unset;
     background-color: transparent;
     opacity: 1;
     transition: 0.3s ease opacity;
