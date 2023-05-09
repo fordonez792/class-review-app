@@ -4966,6 +4966,7 @@ button:hover {
   border-color: var(--navy);
 }
 #home .recent-reviews #single-review {
+  align-self: stretch;
   position: absolute;
   width: 90vw !important;
   border-radius: 10px;
@@ -4989,6 +4990,10 @@ button:hover {
 #home .recent-reviews #single-review.right-most {
   transform: translateX(calc(98%)) scale(0.9);
   opacity: 0;
+}
+#home .recent-reviews #single-review .review-info h1 {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 #home .recent-reviews #single-review .description {
   height: auto;
