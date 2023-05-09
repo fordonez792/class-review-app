@@ -4967,6 +4967,7 @@ button:hover {
 }
 #home .recent-reviews #single-review {
   align-self: stretch;
+  justify-content: space-between;
   position: absolute;
   width: 90vw !important;
   border-radius: 10px;
