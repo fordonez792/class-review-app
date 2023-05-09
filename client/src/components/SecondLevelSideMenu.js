@@ -75,7 +75,6 @@ const SecondLevelSideMenu = ({
         <ul
           className="options"
           onClick={(e) => {
-            console.log(e.target);
             setSelectedDepartment({
               id: e.target.id,
               name: e.target.children[0].textContent,

@@ -102,7 +102,6 @@ const SingleReview = ({
   // The option to report a review
   const reportReviewMutation = useMutation({
     mutationFn: reportReview,
-    onSuccess: (data) => console.log(data),
     onError: (error) => console.log(error),
   });
 
