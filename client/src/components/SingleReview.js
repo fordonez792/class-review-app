@@ -15,6 +15,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { singleReviewTranslations } from "../assets/componentsTranslations";
 import { useLanguageContext } from "../context/LanguageContext";
 import { useAuthStateContext } from "../context/AuthStateContext";
+import { useScreenSizeContext } from "../context/ScreenSizeContext";
 import { voteReview } from "../api/helpfulVotesApi";
 import { deleteReview } from "../api/reviewsApi";
 import { reportReview } from "../api/reportVotesApi";
@@ -24,16 +25,11 @@ import { reportReview } from "../api/reportVotesApi";
 // Only the owner of a review can delete the review
 // If the single reviews are displayed on my account page or home page, there is option to navigate to the course specific page where this review lies
 
-const SingleReview = ({
-  review,
-  debouncedValue,
-  position,
-  index,
-  refetch,
-  isTablet,
-}) => {
+const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
   const { authState } = useAuthStateContext();
   const { language } = useLanguageContext();
+  const { isTablet, isDesktop } = useScreenSizeContext();
+
   const navigate = useNavigate();
   const {
     Course,
@@ -53,8 +49,6 @@ const SingleReview = ({
 
   const menuRef = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  console.log(authState.username, username);
 
   // Set the amount of time since posted
   const updated = new Date(createdAt);
@@ -296,7 +290,7 @@ const SingleReview = ({
             <FaRegThumbsUp />
           )}
           {`(${HelpfulVotes.length}) ${
-            isTablet
+            isTablet || isDesktop
               ? language === "English"
                 ? singleReviewTranslations[6].english
                 : language === "Chinese" && singleReviewTranslations[6].chinese
