@@ -32,7 +32,7 @@ const verifyReportedReview = (reviewId) => {
 
 // Sends email to user that is creating an account, so that they can verify their email address
 const verifyEmail = (id, email, token) => {
-  const url = "http://localhost:3000/";
+  const url = process.env.REACT_APP_URL;
 
   const emailOptions = {
     from: process.env.EMAIL,
