@@ -3908,7 +3908,7 @@ button:hover {
   flex-direction: column;
 }
 #single-review .user-info .user h1 {
-  max-width: 80%;
+  max-width: 100%;
   margin: 0;
 }
 #single-review .user-info .user p {
@@ -4718,7 +4718,6 @@ button:hover {
     right: 3rem;
     top: 35%;
     bottom: 3rem;
-    /* background-color: transparent; */
     border-radius: 10px;
     transition: 0.5s ease transform;
     z-index: 7;
