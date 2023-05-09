@@ -38,6 +38,7 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [navSearch, setNavSearch] = useState("");
+  const [navSearchReady, setNavSearchReady] = useState(false);
 
   const accountMenuRef = useRef();
   const searchbarRef = useRef();
@@ -70,7 +71,10 @@ const Navbar = () => {
   const activateSearchbar = () => {
     if (!searchbarRef.current) return;
     if (window.scrollY > 350) searchbarRef.current?.classList?.add("active");
-    else searchbarRef.current?.classList?.remove("active");
+    else {
+      searchbarRef.current?.classList?.remove("active");
+      setNavSearch("");
+    }
   };
 
   // Goes to home page and closes the search page
@@ -88,14 +92,12 @@ const Navbar = () => {
   // Activates both the close menu when clicking anywhere but the menu on both tablet and mobile and the searchbar function on desktop
   useEffect(() => {
     !isDesktop && document.addEventListener("click", closeAccountMenu);
-    // if (!searchbarRef.current) return;
     location.pathname === "/" &&
       searchbarRef.current &&
       document.addEventListener("scroll", activateSearchbar);
 
     return () => {
       !isDesktop && document.removeEventListener("click", closeAccountMenu);
-      // if (!searchbarRef.current) return;
       location.pathname === "/" &&
         searchbarRef.current &&
         document.removeEventListener("scroll", activateSearchbar);
@@ -177,6 +179,12 @@ const Navbar = () => {
                       onClick={() => {
                         setIsSearchOpen(true);
                         setIsOpen(false);
+                      }}
+                      onKeyDown={(e) => {
+                        e.preventDefault();
+                        if (e.key === "Enter" && navSearchReady) {
+                          navigateSearchResults(navSearch);
+                        }
                       }}
                     />
                     {navSearch && (
@@ -474,6 +482,7 @@ const Navbar = () => {
         isSearchOpen={isSearchOpen}
         setIsSearchOpen={setIsSearchOpen}
         navSearch={navSearch}
+        setNavSearchReady={setNavSearchReady}
       />
     </>
   );

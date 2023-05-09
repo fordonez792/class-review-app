@@ -17,7 +17,12 @@ import { getCoursesByNameOrId, getPopularCourses } from "../api/coursesApi";
 // On Click of any of the single courses will redirect the user to the course specific page
 // User can also view all the search results in the search results page by clicking on the option
 
-const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
+const Search = ({
+  isSearchOpen,
+  setIsSearchOpen,
+  navSearch,
+  setNavSearchReady,
+}) => {
   const navigate = useNavigate();
   const { language } = useLanguageContext();
   const { isDesktop } = useScreenSizeContext();
@@ -60,6 +65,11 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
     setSearch(navSearch);
   }, [navSearch]);
 
+  useEffect(() => {
+    if (!debouncedValue) return;
+    setNavSearchReady(true);
+  }, [debouncedValue]);
+
   return (
     <section id="search" className={isSearchOpen ? "active" : null}>
       {isDesktop && (
@@ -72,13 +82,13 @@ const Search = ({ isSearchOpen, setIsSearchOpen, navSearch }) => {
         <form
           className="searchbar"
           onKeyDown={(e) => {
+            e.preventDefault();
             if (
               e.key === "Enter" &&
               debouncedValue.length > 2 &&
               courses.status === "success"
             ) {
               if (!debouncedValue) return;
-              e.preventDefault();
               navigateSearchResults(debouncedValue);
             }
           }}
