@@ -68,6 +68,7 @@ const Navbar = () => {
 
   // Searchbar appears after user scrolls past home page searchbar if screen is desktop
   const activateSearchbar = () => {
+    console.log("hi");
     if (!searchbarRef.current) return;
     if (window.scrollY > 350) searchbarRef.current?.classList?.add("active");
     else searchbarRef.current?.classList?.remove("active");

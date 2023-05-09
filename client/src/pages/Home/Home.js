@@ -55,7 +55,7 @@ const Home = () => {
   };
 
   return (
-    <section id="home" className="page">
+    <section id="home" className="page" onClick={(e) => console.log(e.target)}>
       <div className="container">
         <article className="picture">
           <img src={images[0].source} alt="image" />
@@ -82,6 +82,7 @@ const Home = () => {
                   ? homeTranslations[1].english
                   : language === "Chinese" && homeTranslations[1].chinese
               }
+              disabled={isDesktop ? false : true}
               autoComplete="off"
             />
           </form>
