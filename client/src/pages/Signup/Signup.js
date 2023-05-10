@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import { FaUserAlt, FaLock, FaCheckDouble, FaAt } from "react-icons/fa";
+import {
+  FaUserAlt,
+  FaLock,
+  FaCheckDouble,
+  FaAt,
+  FaGoogle,
+} from "react-icons/fa";
 import * as Yup from "yup";
 import axios from "axios";
 
+import { loginTranslations } from "../Login/loginTranslations";
 import { signupTranslations } from "./signupTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { useScreenSizeContext } from "../../context/ScreenSizeContext";
 
 // This is the signup page for this website
 // Allows users to create their account locally
@@ -15,6 +23,7 @@ import { useLanguageContext } from "../../context/LanguageContext";
 
 const Signup = () => {
   const { language } = useLanguageContext();
+  const { isDesktop } = useScreenSizeContext();
   const navigate = useNavigate();
   const [message, setMessage] = useState({ isError: false, msg: "" });
 
@@ -130,6 +139,64 @@ const Signup = () => {
           setMessage({ isError: false, msg: res.data.message });
           actions.resetForm();
         }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // Handles google sign in allowing only for ndhu email domains and then passing data to server to add a user to db
+  // Returns an access token that is later used to persist the login and verify the user
+  const handleGoogleSignIn = (e) => {
+    e.preventDefault();
+    setMessage({
+      msg:
+        language === "English"
+          ? loginTranslations[8].english
+          : language === "Chinese" && loginTranslations[8].chinese,
+      classname: "green",
+    });
+    googleSignIn()
+      .then((res) => {
+        const { displayName, uid, email, photoURL } = res.user.providerData[0];
+        // Check if the email the user choose to authenticate with google is an NDHU email, if not then can't accept
+        if (email.split("@", 2)[1] !== "gms.ndhu.edu.tw") {
+          setMessage({
+            ...error,
+            msg:
+              language === "English"
+                ? loginTranslations[9].english
+                : language === "Chinese" && loginTranslations[9].chinese,
+          });
+          return;
+        }
+        // If the email is NDHU email then input the data into database
+        axios
+          .post(`${process.env.REACT_APP_URL}users/signup-google`, {
+            username: displayName,
+            email,
+            photoUrl: photoURL,
+          })
+          .then((res) => {
+            if (res.data.status === "FAILED")
+              setMessage({ msg: res.data.message, classname: null });
+            // If success then set the authState to logged in
+            if (res.data.status === "SUCCESS") {
+              setAuthState({
+                username: displayName,
+                id: uid,
+                loggedIn: true,
+              });
+            }
+          })
+          .catch((error) => console.log(error));
+
+        // Now set the accessToken in the localstorage and navigate to home
+        res.user
+          .getIdToken()
+          .then((accessToken) => {
+            localStorage.setItem("accessToken", accessToken);
+            navigate("/");
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
   };
@@ -250,6 +317,18 @@ const Signup = () => {
               </Form>
             )}
           </Formik>
+          <div className="or">
+            <div></div>
+            <p>
+              {language === "English"
+                ? loginTranslations[4].english
+                : language === "Chinese" && loginTranslations[4].chinese}
+            </p>
+            <div></div>
+          </div>
+          <button className="googleBtn" onClick={(e) => handleGoogleSignIn(e)}>
+            <FaGoogle />
+          </button>
         </article>
         <article className="welcome-back">
           <div className="header">
@@ -259,11 +338,13 @@ const Signup = () => {
                 : language === "Chinese" && signupTranslations[6].chinese}
             </h1>
           </div>
-          <p>
-            {language === "English"
-              ? signupTranslations[7].english
-              : language === "Chinese" && signupTranslations[7].chinese}
-          </p>
+          {isDesktop && (
+            <p>
+              {language === "English"
+                ? signupTranslations[7].english
+                : language === "Chinese" && signupTranslations[7].chinese}
+            </p>
+          )}
           <button onClick={() => navigate("/login")}>
             {language === "English"
               ? signupTranslations[8].english

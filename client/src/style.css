@@ -725,7 +725,7 @@ button:hover {
   justify-content: center;
 }
 #signup .container {
-  height: 90%;
+  height: 95%;
   width: 90%;
   justify-content: space-around;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -745,9 +745,30 @@ button:hover {
 }
 #signup .form-container {
   margin-top: 5px;
+  margin-bottom: 5px;
 }
-#signup .create-account button {
-  margin-bottom: 30px;
+#signup .or {
+  width: 85%;
+  text-transform: uppercase;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+#signup .or div:last-child,
+#signup .or div:first-child {
+  height: 1px;
+  width: 100%;
+  background-color: var(--light-gray);
+}
+#signup .or p {
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 0.8rem;
+}
+#signup .googleBtn {
+  margin-bottom: 10px !important;
 }
 #signup .welcome-back {
   flex: 30%;
@@ -765,7 +786,7 @@ button:hover {
   font-size: 0.8rem;
 }
 #signup .welcome-back .header {
-  margin-bottom: 0;
+  margin-bottom: 20px;
   margin-top: 20px;
 }
 #signup .welcome-back .header h1 {
@@ -791,7 +812,31 @@ button:hover {
 /* Desktop */
 @media only screen and (min-width: 1200px) {
   #signup .container {
-    width: 45%;
+    flex-direction: row-reverse;
+    height: 75%;
+    width: 60%;
+  }
+  #signup .or p {
+    margin: 15px 0;
+  }
+  #signup .welcome-back {
+    flex: 40%;
+    justify-content: center;
+    height: 100%;
+  }
+  #signup .welcome-back .header {
+    margin-bottom: 0;
+  }
+  #signup .welcome-back .header h1 {
+    font-size: 2rem;
+  }
+  #signup .welcome-back p {
+    font-size: 1.2rem;
+    width: 80%;
+    margin: 50px 0;
+  }
+  #signup .create-account {
+    flex: 60%;
   }
 }
 /* End of Media Query Signup Page */
@@ -890,7 +935,25 @@ button:hover {
 /* Desktop */
 @media only screen and (min-width: 1200px) {
   #login .container {
-    width: 45%;
+    flex-direction: row-reverse;
+    height: 75%;
+    width: 60%;
+  }
+  #login .new-here {
+    flex: 40%;
+    justify-content: center;
+    height: 100%;
+  }
+  #login .new-here .header h1 {
+    font-size: 2rem;
+  }
+  #login .new-here p {
+    font-size: 1.2rem;
+    width: 80%;
+    margin: 50px 0;
+  }
+  #login .login-container {
+    flex: 60%;
   }
 }
 /* End of Media Query Login Page */
