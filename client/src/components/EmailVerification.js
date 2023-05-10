@@ -14,7 +14,7 @@ const EmailVerification = () => {
   const navigate = useNavigate();
   const { id, token } = useParams();
 
-  const [verified, setVerified] = useState(false);
+  const [verified, setVerified] = useState(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -35,25 +35,34 @@ const EmailVerification = () => {
     <section className="page" id="email-verification">
       <div className="container">
         <article className="status">
-          <div className={`icon ${verified ? "success" : "error"}`}>
-            {verified ? <FaCheckCircle /> : <FaTimesCircle />}
+          <div
+            className={`icon ${
+              verified === true ? "success" : verified === false && "error"
+            }`}
+          >
+            {verified === true ? (
+              <FaCheckCircle />
+            ) : (
+              verified === false && <FaTimesCircle />
+            )}
           </div>
           <div className="header">
             <h1>
-              {verified
+              {verified === true
                 ? language === "English"
                   ? emailVerificationTranslations[0].english
                   : language === "Chinese" &&
                     emailVerificationTranslations[0].chinese
-                : language === "English"
-                ? emailVerificationTranslations[1].english
+                : verified === false
+                ? language === "English" &&
+                  emailVerificationTranslations[1].english
                 : language === "Chinese" &&
                   emailVerificationTranslations[1].chinese}
             </h1>
           </div>
         </article>
         <article className="status-message">
-          {verified ? (
+          {verified === true ? (
             <p>
               {language === "English"
                 ? emailVerificationTranslations[2].english
@@ -61,21 +70,24 @@ const EmailVerification = () => {
                   emailVerificationTranslations[2].chinese}
             </p>
           ) : (
-            <p>
-              {language === "English"
-                ? emailVerificationTranslations[3].english
-                : language === "Chinese" &&
-                  emailVerificationTranslations[3].chinese}
-            </p>
+            verified === false && (
+              <p>
+                {language === "English"
+                  ? emailVerificationTranslations[3].english
+                  : language === "Chinese" &&
+                    emailVerificationTranslations[3].chinese}
+              </p>
+            )
           )}
           <button onClick={() => navigate("/login")}>
-            {verified
+            {verified === true
               ? language === "English"
                 ? emailVerificationTranslations[4].english
                 : language === "Chinese" &&
                   emailVerificationTranslations[4].chinese
-              : language === "English"
-              ? emailVerificationTranslations[5].english
+              : verified === false
+              ? language === "English" &&
+                emailVerificationTranslations[5].english
               : language === "Chinese" &&
                 emailVerificationTranslations[5].chinese}
           </button>

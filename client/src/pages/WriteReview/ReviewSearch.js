@@ -60,6 +60,9 @@ const ReviewSearch = ({ courseId, setCourseId, setStep, error, setError }) => {
             autoComplete="off"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.preventDefault();
+            }}
           />
           {search && (
             <FaTimes className="clear" onClick={() => setSearch("")} />
