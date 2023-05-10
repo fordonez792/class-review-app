@@ -7,6 +7,7 @@ import {
   FaUserCircle,
   FaRegThumbsUp,
   FaThumbsUp,
+  FaCheckCircle,
   FaTrash,
   FaExclamationCircle,
 } from "react-icons/fa";
@@ -34,6 +35,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
   const {
     Course,
     HelpfulVotes,
+    ReportVotes,
     User,
     id,
     title,
@@ -98,6 +100,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
   // The option to report a review
   const reportReviewMutation = useMutation({
     mutationFn: reportReview,
+    onSuccess: () => refetch(),
     onError: (error) => console.log(error),
   });
 
@@ -183,7 +186,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
             }`}</p>
           )}
         </div>
-        {!position && (
+        {!position && location.pathname !== "/" && (
           <div className="options">
             <div className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <BsThreeDotsVertical />
@@ -193,14 +196,32 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
               ref={menuRef}
             >
               <li
-                className="option"
+                className={`option ${
+                  Array.from(ReportVotes).find(
+                    (vote) => vote.UserId === authState.id
+                  ) && "reported"
+                }`}
                 onClick={() => reportReviewMutation.mutate({ id })}
               >
-                <FaExclamationCircle />
-                {language === "English"
-                  ? singleReviewTranslations[22].english
-                  : language === "Chinese" &&
-                    singleReviewTranslations[22].chinese}
+                {Array.from(ReportVotes).find(
+                  (vote) => vote.UserId === authState.id
+                ) ? (
+                  <>
+                    <FaCheckCircle />
+                    {language === "English"
+                      ? singleReviewTranslations[23].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[23].chinese}
+                  </>
+                ) : (
+                  <>
+                    <FaExclamationCircle />
+                    {language === "English"
+                      ? singleReviewTranslations[22].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[22].chinese}
+                  </>
+                )}
               </li>
               {(authState.username === username || authState.admin) && (
                 <li

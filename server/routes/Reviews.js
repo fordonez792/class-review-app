@@ -6,6 +6,7 @@ const {
   Courses,
   Users,
   HelpfulVotes,
+  ReportVotes,
   Sequelize,
 } = require("../models");
 const { authenticateToken } = require("../middleware/AuthMiddleware");
@@ -217,7 +218,11 @@ router.get("/filter/", async (req, res) => {
     where,
     order,
     attributes: { exclude: ["updatedAt"] },
-    include: [{ model: Users }, { model: HelpfulVotes }],
+    include: [
+      { model: Users },
+      { model: HelpfulVotes },
+      { model: ReportVotes },
+    ],
   })
     .then((reviews) => {
       if (!reviews || reviews.length === 0) {

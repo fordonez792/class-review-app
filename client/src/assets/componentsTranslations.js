@@ -214,6 +214,11 @@ export const singleReviewTranslations = [
     english: "Report",
     chinese: "舉報帖",
   },
+  {
+    id: 24,
+    english: "Reported",
+    chinese: "檢舉",
+  },
 ];
 
 export const emailVerificationTranslations = [

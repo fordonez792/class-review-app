@@ -2,7 +2,13 @@ require("dotenv").config();
 
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const { Users, Reviews, HelpfulVotes, Courses } = require("../models");
+const {
+  Users,
+  Reviews,
+  HelpfulVotes,
+  ReportVotes,
+  Courses,
+} = require("../models");
 const { authenticateToken } = require("../middleware/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 const { verifyEmail } = require("../services/Email");
@@ -211,7 +217,12 @@ router.get("/auth", authenticateToken, async (req, res) => {
 router.get("/account", authenticateToken, async (req, res) => {
   const reviews = await Reviews.findAll({
     where: { creator: req.user.id },
-    include: [{ model: Users }, { model: HelpfulVotes }, { model: Courses }],
+    include: [
+      { model: Users },
+      { model: HelpfulVotes },
+      { model: Courses },
+      { model: ReportVotes },
+    ],
     order: [["createdAt", "DESC"]],
   });
   Users.findOne({

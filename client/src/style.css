@@ -3946,7 +3946,7 @@ button:hover {
   overflow: hidden;
   background-color: var(--light-gray);
   transition: 0.3s ease opacity, 0.3s ease transform;
-  z-index: 10;
+  z-index: 6;
 }
 #single-review .user-info .options ul.active {
   opacity: 1;
@@ -3960,15 +3960,24 @@ button:hover {
   align-items: center;
   font-size: 1rem;
   padding: 10px;
-  width: 100px;
+  width: 120px;
   cursor: pointer;
   transition: 0.3s ease background-color;
 }
-#single-review .user-info .options ul li.delete {
-  color: var(--red);
-}
 #single-review .user-info .options ul li:hover {
   background-color: var(--dark-gray);
+}
+#single-review .user-info .options ul li.reported:hover {
+  background-color: var(--light-gray);
+}
+#single-review .user-info .options ul li.reported {
+  cursor: default;
+}
+#single-review .user-info .options ul li.reported svg {
+  color: var(--green);
+}
+#single-review .user-info .options ul li.delete {
+  color: var(--red);
 }
 #single-review .user-info .options ul li > * {
   pointer-events: none;
@@ -4118,7 +4127,7 @@ button:hover {
   }
   #single-review .user-info .options ul li {
     font-size: calc(1rem * 1.1);
-    width: calc(100px * 1.1);
+    width: calc(110px * 1.1);
   }
   #single-review .stars-container .stars {
     font-size: calc(1.2rem * 1.1);
