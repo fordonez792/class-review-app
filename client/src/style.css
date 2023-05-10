@@ -813,7 +813,7 @@ button:hover {
 @media only screen and (min-width: 1200px) {
   #signup .container {
     flex-direction: row-reverse;
-    height: 75%;
+    height: 90%;
     width: 60%;
   }
   #signup .or p {
