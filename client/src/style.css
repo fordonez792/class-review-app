@@ -235,7 +235,7 @@ button:hover {
   width: 100vw !important;
   background-color: var(--dark-gray);
   opacity: 0.8;
-  z-index: 7;
+  z-index: 11;
 }
 .highlight {
   display: inline;
@@ -3876,6 +3876,7 @@ button:hover {
 
 /* Single Review */
 #single-review {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -4170,6 +4171,99 @@ button:hover {
 /* End of Media Query Single Review */
 
 /* End of Single Review */
+
+/* Confirm Delete Modal */
+#confirm-delete-modal {
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+#confirm-delete-modal.active {
+  opacity: 1;
+  pointer-events: all;
+  overflow: visible;
+}
+#confirm-delete-modal .container {
+  position: relative;
+  height: 375px;
+  width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 12;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: var(--white) !important;
+}
+#confirm-delete-modal .container .close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: 0.3s ease color;
+}
+#confirm-delete-modal .container .close-btn:hover {
+  color: var(--red);
+}
+#confirm-delete-modal .container .icon {
+  font-size: 5rem;
+  color: var(--red);
+}
+#confirm-delete-modal .container .header {
+  padding: 0 !important;
+  margin-top: 25px !important;
+}
+#confirm-delete-modal .container p {
+  width: 80%;
+  text-align: center;
+}
+#confirm-delete-modal .container .btn-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  margin-top: 25px;
+}
+#confirm-delete-modal .container .btn-container button {
+  width: 120px;
+  background-color: var(--red);
+  border-radius: 3px;
+  border: none;
+}
+#confirm-delete-modal .container .btn-container button:hover {
+  color: var(--white);
+}
+#confirm-delete-modal .container .btn-container button:first-child {
+  background-color: var(--white);
+  color: var(--navy);
+  border: none;
+  box-shadow: none;
+}
+
+/* Media Query Confirm Delete Modal */
+/* Tablet */
+@media only screen and (min-width: 768px) {
+  #confirm-delete-modal .container .header h1 {
+    font-size: 2rem;
+  }
+}
+/* Desktop */
+@media only screen and (min-width: 1200px) {
+  #confirm-delete-modal .container .header h1 {
+    font-size: 1.7rem;
+  }
+}
+/* End of Media Query Confirm Delete Modal */
+
+/* End of Confirm Delete Modal */
 
 /* Account */
 #account {

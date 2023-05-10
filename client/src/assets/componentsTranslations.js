@@ -221,6 +221,30 @@ export const singleReviewTranslations = [
   },
 ];
 
+export const confirmDeleteTranslations = [
+  {
+    id: 1,
+    english: "Are You Sure?",
+    chinese: "你確定嗎？",
+  },
+  {
+    id: 2,
+    english:
+      "Do you really want to delete this review? This process can't be undone.",
+    chinese: "您真的要刪除此評論嗎？此操作無法撤銷",
+  },
+  {
+    id: 3,
+    english: "Cancel",
+    chinese: "取消",
+  },
+  {
+    id: 4,
+    english: "Delete",
+    chinese: "刪除",
+  },
+];
+
 export const emailVerificationTranslations = [
   {
     id: 1,

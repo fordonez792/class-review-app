@@ -13,6 +13,8 @@ import {
 } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
+
 import { singleReviewTranslations } from "../assets/componentsTranslations";
 import { useLanguageContext } from "../context/LanguageContext";
 import { useAuthStateContext } from "../context/AuthStateContext";
@@ -51,6 +53,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
 
   const menuRef = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false);
 
   // Set the amount of time since posted
   const updated = new Date(createdAt);
@@ -124,304 +127,328 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
     return () => document.removeEventListener("click", closeMenu);
   }, []);
 
+  useEffect(() => {
+    if (isConfirmDeleteOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+  }, [isConfirmDeleteOpen]);
+
   return (
-    <div
-      id="single-review"
-      className={
-        position
-          ? position === index
-            ? "center"
-            : index === position + 1 || index === position - 4
-            ? "right"
-            : index === position + 2 || index === position - 3
-            ? "right-most"
-            : index === position + 4 || index === position - 1
-            ? "left"
-            : index === position + 3 || index === position - 2
-            ? "left-most"
+    <>
+      <div
+        id="single-review"
+        className={
+          position
+            ? position === index
+              ? "center"
+              : index === position + 1 || index === position - 4
+              ? "right"
+              : index === position + 2 || index === position - 3
+              ? "right-most"
+              : index === position + 4 || index === position - 1
+              ? "left"
+              : index === position + 3 || index === position - 2
+              ? "left-most"
+              : null
             : null
-          : null
-      }
-      title={
-        Course &&
-        `${
-          language === "English"
-            ? Course.courseEnglishName
-            : language === "Chinese" && Course.courseName
-        } - ${Course.courseId}`
-      }
-    >
-      <article className="user-info">
-        <div className="photo">
-          {anonymous ? (
-            <FaUserCircle />
-          ) : photoUrl ? (
-            <img src={photoUrl} alt="" />
-          ) : (
-            <FaUserCircle />
-          )}
-        </div>
-        <div className="user">
-          <h1>
-            {anonymous
-              ? language === "English"
-                ? singleReviewTranslations[0].english
-                : language === "Chinese" && singleReviewTranslations[0].chinese
-              : username}
-          </h1>
-          {!anonymous && (
-            <p>{`${numberOfReviews} ${
-              numberOfReviews === 1
-                ? language === "English"
-                  ? singleReviewTranslations[1].english
-                  : language === "Chinese" &&
-                    singleReviewTranslations[1].chinese
-                : language === "English"
-                ? singleReviewTranslations[2].english
-                : language === "Chinese" && singleReviewTranslations[2].chinese
-            } | ${numberOfHelpfulVotes} ${
-              language === "English"
-                ? singleReviewTranslations[3].english
-                : language === "Chinese" && singleReviewTranslations[3].chinese
-            }`}</p>
-          )}
-        </div>
-        {!position && location.pathname !== "/" && (
-          <div className="options">
-            <div className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <BsThreeDotsVertical />
-            </div>
-            <ul
-              className={`menu ${isMenuOpen ? "active" : null}`}
-              ref={menuRef}
-            >
-              <li
-                className={`option ${
-                  Array.from(ReportVotes).find(
-                    (vote) => vote.UserId === authState.id
-                  ) && "reported"
-                }`}
-                onClick={() => reportReviewMutation.mutate({ id })}
-              >
-                {Array.from(ReportVotes).find(
-                  (vote) => vote.UserId === authState.id
-                ) ? (
-                  <>
-                    <FaCheckCircle />
-                    {language === "English"
-                      ? singleReviewTranslations[23].english
-                      : language === "Chinese" &&
-                        singleReviewTranslations[23].chinese}
-                  </>
-                ) : (
-                  <>
-                    <FaExclamationCircle />
-                    {language === "English"
-                      ? singleReviewTranslations[22].english
-                      : language === "Chinese" &&
-                        singleReviewTranslations[22].chinese}
-                  </>
-                )}
-              </li>
-              {(authState.username === username || authState.admin) && (
-                <li
-                  className="option delete"
-                  onClick={() => deleteReviewMutation.mutate({ id, courseId })}
-                >
-                  <FaTrash />
-                  {language === "English"
-                    ? singleReviewTranslations[4].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[4].chinese}
-                </li>
-              )}
-            </ul>
+        }
+        title={
+          Course &&
+          `${
+            language === "English"
+              ? Course.courseEnglishName
+              : language === "Chinese" && Course.courseName
+          } - ${Course.courseId}`
+        }
+      >
+        <article className="user-info">
+          <div className="photo">
+            {anonymous ? (
+              <FaUserCircle />
+            ) : photoUrl ? (
+              <img src={photoUrl} alt="" />
+            ) : (
+              <FaUserCircle />
+            )}
           </div>
-        )}
-      </article>
-      <article className="stars-container">
-        <div className="stars">
-          {[...Array(5).keys()].map((i) => {
-            return (
-              <div
-                key={i}
-                className={
-                  recommend <= 0.3 + i
-                    ? null
-                    : recommend <= 0.7 + i
-                    ? "half"
-                    : recommend <= 0.9 + i
-                    ? "full"
-                    : "full"
-                }
-              >
-                <FaStar className="fullStar" />
-                {recommend >= 0.3 + i && recommend < 0.9 + i && (
-                  <FaStarHalf className="halfStar" />
-                )}
+          <div className="user">
+            <h1>
+              {anonymous
+                ? language === "English"
+                  ? singleReviewTranslations[0].english
+                  : language === "Chinese" &&
+                    singleReviewTranslations[0].chinese
+                : username}
+            </h1>
+            {!anonymous && (
+              <p>{`${numberOfReviews} ${
+                numberOfReviews === 1
+                  ? language === "English"
+                    ? singleReviewTranslations[1].english
+                    : language === "Chinese" &&
+                      singleReviewTranslations[1].chinese
+                  : language === "English"
+                  ? singleReviewTranslations[2].english
+                  : language === "Chinese" &&
+                    singleReviewTranslations[2].chinese
+              } | ${numberOfHelpfulVotes} ${
+                language === "English"
+                  ? singleReviewTranslations[3].english
+                  : language === "Chinese" &&
+                    singleReviewTranslations[3].chinese
+              }`}</p>
+            )}
+          </div>
+          {!position && location.pathname !== "/" && (
+            <div className="options">
+              <div className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <BsThreeDotsVertical />
               </div>
-            );
-          })}
-        </div>
-        <p>{`${year} - ${semester}`}</p>
-      </article>
-      <article className="review-info">
-        <h1
-          dangerouslySetInnerHTML={{
-            __html: highlightedTitle || title,
-          }}
-        />
-        <p
-          className="description"
-          dangerouslySetInnerHTML={{
-            __html: highlightedDescription || description,
-          }}
-        />
-        {position && (
-          <p className="link" onClick={() => navigateCourse()}>
-            {isTablet
-              ? language === "English"
-                ? singleReviewTranslations[5].english
-                : language === "Chinese" && singleReviewTranslations[5].chinese
-              : ""}
-            {"("}
-            {language === "English"
-              ? Course.courseEnglishName
-              : language === "Chinese" && Course.courseName}
-            {" - "}
-            {Course.courseId}
-            {")"}
-          </p>
-        )}
-        {window.location.pathname === "/account" && (
-          <p className="link" onClick={() => navigateCourse()}>
-            {language === "English"
-              ? Course.courseEnglishName
-              : language === "Chinese" && Course.courseName}
-            {" - "}
-            {Course.courseId}
-          </p>
-        )}
-      </article>
-      <article className="footer">
-        <span onClick={() => helpfulVoteMutation.mutate({ id })}>
-          {HelpfulVotes.some((item) => item.UserId === User.id) ? (
-            <FaThumbsUp />
-          ) : (
-            <FaRegThumbsUp />
+              <ul
+                className={`menu ${isMenuOpen ? "active" : null}`}
+                ref={menuRef}
+              >
+                <li
+                  className={`option ${
+                    Array.from(ReportVotes).find(
+                      (vote) => vote.UserId === authState.id
+                    ) && "reported"
+                  }`}
+                  onClick={() => reportReviewMutation.mutate({ id })}
+                >
+                  {Array.from(ReportVotes).find(
+                    (vote) => vote.UserId === authState.id
+                  ) ? (
+                    <>
+                      <FaCheckCircle />
+                      {language === "English"
+                        ? singleReviewTranslations[23].english
+                        : language === "Chinese" &&
+                          singleReviewTranslations[23].chinese}
+                    </>
+                  ) : (
+                    <>
+                      <FaExclamationCircle />
+                      {language === "English"
+                        ? singleReviewTranslations[22].english
+                        : language === "Chinese" &&
+                          singleReviewTranslations[22].chinese}
+                    </>
+                  )}
+                </li>
+                {(authState.username === username || authState.admin) && (
+                  <li
+                    className="option delete"
+                    onClick={
+                      () => setIsConfirmDeleteOpen(true)
+                      // deleteReviewMutation.mutate({ id, courseId })
+                    }
+                  >
+                    <FaTrash />
+                    {language === "English"
+                      ? singleReviewTranslations[4].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[4].chinese}
+                  </li>
+                )}
+              </ul>
+            </div>
           )}
-          {`(${HelpfulVotes.length}) ${
-            isTablet || isDesktop
-              ? language === "English"
-                ? singleReviewTranslations[6].english
-                : language === "Chinese" && singleReviewTranslations[6].chinese
-              : ""
-          }`}
-        </span>
-        <p>
-          {language === "English"
-            ? singleReviewTranslations[7].english
-            : language === "Chinese" && singleReviewTranslations[7].chinese}
-          {date === 0
-            ? seconds < 60
-              ? seconds === 1
-                ? ` ${Math.floor(seconds)} ${
-                    language === "English"
-                      ? singleReviewTranslations[8].english
-                      : language === "Chinese" &&
-                        singleReviewTranslations[8].chinese
-                  }`
-                : ` ${Math.floor(seconds)} ${
-                    language === "English"
-                      ? singleReviewTranslations[9].english
-                      : language === "Chinese" &&
-                        singleReviewTranslations[9].chinese
-                  }`
-              : seconds < 60 * 60
-              ? Math.floor(seconds / 60) === 1
-                ? ` ${Math.floor(seconds / 60)} ${
-                    language === "English"
-                      ? singleReviewTranslations[10].english
-                      : language === "Chinese" &&
-                        singleReviewTranslations[10].chinese
-                  }`
-                : ` ${Math.floor(seconds / 60)} ${
-                    language === "English"
-                      ? singleReviewTranslations[11].english
-                      : language === "Chinese" &&
-                        singleReviewTranslations[11].chinese
-                  }`
-              : Math.floor(seconds / 60 / 60) === 1
-              ? ` ${Math.floor(seconds / 60 / 60)} ${
-                  language === "English"
-                    ? singleReviewTranslations[12].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[12].chinese
-                }`
-              : ` ${Math.floor(seconds / 60 / 60)} ${
-                  language === "English"
-                    ? singleReviewTranslations[13].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[13].chinese
-                }`
-            : date < 7
-            ? Math.floor(date) === 1
-              ? ` ${date} ${
-                  language === "English"
-                    ? singleReviewTranslations[14].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[14].chinese
-                }`
-              : ` ${date} ${
-                  language === "English"
-                    ? singleReviewTranslations[15].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[15].chinese
-                }`
-            : date < 31
-            ? Math.floor(date / 7) === 1
-              ? ` ${Math.floor(date / 7)} ${
-                  language === "English"
-                    ? singleReviewTranslations[16].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[16].chinese
-                }`
-              : ` ${Math.floor(date / 7)} ${
-                  language === "English"
-                    ? singleReviewTranslations[17].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[17].chinese
-                }`
-            : date < 365
-            ? Math.floor(date / 30) === 1
-              ? ` ${Math.floor(date / 30)} ${
-                  language === "English"
-                    ? singleReviewTranslations[18].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[18].chinese
-                }`
-              : ` ${Math.floor(date / 30)} ${
-                  language === "English"
-                    ? singleReviewTranslations[19].english
-                    : language === "Chinese" &&
-                      singleReviewTranslations[19].chinese
-                }`
-            : Math.floor(date / 365) === 1
-            ? ` ${Math.floor(date / 365)} ${
-                language === "English"
-                  ? singleReviewTranslations[20].english
+        </article>
+        <article className="stars-container">
+          <div className="stars">
+            {[...Array(5).keys()].map((i) => {
+              return (
+                <div
+                  key={i}
+                  className={
+                    recommend <= 0.3 + i
+                      ? null
+                      : recommend <= 0.7 + i
+                      ? "half"
+                      : recommend <= 0.9 + i
+                      ? "full"
+                      : "full"
+                  }
+                >
+                  <FaStar className="fullStar" />
+                  {recommend >= 0.3 + i && recommend < 0.9 + i && (
+                    <FaStarHalf className="halfStar" />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <p>{`${year} - ${semester}`}</p>
+        </article>
+        <article className="review-info">
+          <h1
+            dangerouslySetInnerHTML={{
+              __html: highlightedTitle || title,
+            }}
+          />
+          <p
+            className="description"
+            dangerouslySetInnerHTML={{
+              __html: highlightedDescription || description,
+            }}
+          />
+          {position && (
+            <p className="link" onClick={() => navigateCourse()}>
+              {isTablet
+                ? language === "English"
+                  ? singleReviewTranslations[5].english
                   : language === "Chinese" &&
-                    singleReviewTranslations[20].chinese
-              }`
-            : ` ${Math.floor(date / 365)} ${
-                language === "English"
-                  ? singleReviewTranslations[21].english
+                    singleReviewTranslations[5].chinese
+                : ""}
+              {"("}
+              {language === "English"
+                ? Course.courseEnglishName
+                : language === "Chinese" && Course.courseName}
+              {" - "}
+              {Course.courseId}
+              {")"}
+            </p>
+          )}
+          {window.location.pathname === "/account" && (
+            <p className="link" onClick={() => navigateCourse()}>
+              {language === "English"
+                ? Course.courseEnglishName
+                : language === "Chinese" && Course.courseName}
+              {" - "}
+              {Course.courseId}
+            </p>
+          )}
+        </article>
+        <article className="footer">
+          <span onClick={() => helpfulVoteMutation.mutate({ id })}>
+            {HelpfulVotes.some((item) => item.UserId === User.id) ? (
+              <FaThumbsUp />
+            ) : (
+              <FaRegThumbsUp />
+            )}
+            {`(${HelpfulVotes.length}) ${
+              isTablet || isDesktop
+                ? language === "English"
+                  ? singleReviewTranslations[6].english
                   : language === "Chinese" &&
-                    singleReviewTranslations[21].chinese
-              }`}
-        </p>
-      </article>
-    </div>
+                    singleReviewTranslations[6].chinese
+                : ""
+            }`}
+          </span>
+          <p>
+            {language === "English"
+              ? singleReviewTranslations[7].english
+              : language === "Chinese" && singleReviewTranslations[7].chinese}
+            {date === 0
+              ? seconds < 60
+                ? seconds === 1
+                  ? ` ${Math.floor(seconds)} ${
+                      language === "English"
+                        ? singleReviewTranslations[8].english
+                        : language === "Chinese" &&
+                          singleReviewTranslations[8].chinese
+                    }`
+                  : ` ${Math.floor(seconds)} ${
+                      language === "English"
+                        ? singleReviewTranslations[9].english
+                        : language === "Chinese" &&
+                          singleReviewTranslations[9].chinese
+                    }`
+                : seconds < 60 * 60
+                ? Math.floor(seconds / 60) === 1
+                  ? ` ${Math.floor(seconds / 60)} ${
+                      language === "English"
+                        ? singleReviewTranslations[10].english
+                        : language === "Chinese" &&
+                          singleReviewTranslations[10].chinese
+                    }`
+                  : ` ${Math.floor(seconds / 60)} ${
+                      language === "English"
+                        ? singleReviewTranslations[11].english
+                        : language === "Chinese" &&
+                          singleReviewTranslations[11].chinese
+                    }`
+                : Math.floor(seconds / 60 / 60) === 1
+                ? ` ${Math.floor(seconds / 60 / 60)} ${
+                    language === "English"
+                      ? singleReviewTranslations[12].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[12].chinese
+                  }`
+                : ` ${Math.floor(seconds / 60 / 60)} ${
+                    language === "English"
+                      ? singleReviewTranslations[13].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[13].chinese
+                  }`
+              : date < 7
+              ? Math.floor(date) === 1
+                ? ` ${date} ${
+                    language === "English"
+                      ? singleReviewTranslations[14].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[14].chinese
+                  }`
+                : ` ${date} ${
+                    language === "English"
+                      ? singleReviewTranslations[15].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[15].chinese
+                  }`
+              : date < 31
+              ? Math.floor(date / 7) === 1
+                ? ` ${Math.floor(date / 7)} ${
+                    language === "English"
+                      ? singleReviewTranslations[16].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[16].chinese
+                  }`
+                : ` ${Math.floor(date / 7)} ${
+                    language === "English"
+                      ? singleReviewTranslations[17].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[17].chinese
+                  }`
+              : date < 365
+              ? Math.floor(date / 30) === 1
+                ? ` ${Math.floor(date / 30)} ${
+                    language === "English"
+                      ? singleReviewTranslations[18].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[18].chinese
+                  }`
+                : ` ${Math.floor(date / 30)} ${
+                    language === "English"
+                      ? singleReviewTranslations[19].english
+                      : language === "Chinese" &&
+                        singleReviewTranslations[19].chinese
+                  }`
+              : Math.floor(date / 365) === 1
+              ? ` ${Math.floor(date / 365)} ${
+                  language === "English"
+                    ? singleReviewTranslations[20].english
+                    : language === "Chinese" &&
+                      singleReviewTranslations[20].chinese
+                }`
+              : ` ${Math.floor(date / 365)} ${
+                  language === "English"
+                    ? singleReviewTranslations[21].english
+                    : language === "Chinese" &&
+                      singleReviewTranslations[21].chinese
+                }`}
+          </p>
+        </article>
+        {location.pathname !== "/" && (
+          <ConfirmDeleteModal
+            isConfirmDeleteOpen={isConfirmDeleteOpen}
+            setIsConfirmDeleteOpen={setIsConfirmDeleteOpen}
+            mutate={deleteReviewMutation.mutate}
+            id={id}
+            courseId={courseId}
+          />
+        )}
+      </div>
+    </>
   );
 };
 
