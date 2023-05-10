@@ -1116,6 +1116,7 @@ button:hover {
     align-items: center;
     padding: 12px;
     border-radius: 50%;
+    max-width: none;
     transition: 0.3s ease background-color;
     cursor: pointer;
   }
