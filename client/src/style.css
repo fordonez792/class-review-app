@@ -1694,6 +1694,9 @@ button:hover {
     padding: 10px 1.5rem !important;
     font-size: 1rem;
   }
+  #side-menu.side-menu2 .options li svg {
+    display: none;
+  }
   #side-menu .options li svg {
     font-size: 1.2rem;
   }
