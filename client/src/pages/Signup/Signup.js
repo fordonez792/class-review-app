@@ -15,6 +15,7 @@ import { loginTranslations } from "../Login/loginTranslations";
 import { signupTranslations } from "./signupTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { useScreenSizeContext } from "../../context/ScreenSizeContext";
+import { useAuthStateContext } from "../../context/AuthStateContext";
 
 // This is the signup page for this website
 // Allows users to create their account locally
@@ -22,6 +23,7 @@ import { useScreenSizeContext } from "../../context/ScreenSizeContext";
 // Users can also choose to navigate from here to the login page
 
 const Signup = () => {
+  const { setAuthState, googleSignIn } = useAuthStateContext();
   const { language } = useLanguageContext();
   const { isDesktop } = useScreenSizeContext();
   const navigate = useNavigate();
@@ -152,7 +154,7 @@ const Signup = () => {
         language === "English"
           ? loginTranslations[8].english
           : language === "Chinese" && loginTranslations[8].chinese,
-      classname: "green",
+      isError: false,
     });
     googleSignIn()
       .then((res) => {
@@ -160,7 +162,7 @@ const Signup = () => {
         // Check if the email the user choose to authenticate with google is an NDHU email, if not then can't accept
         if (email.split("@", 2)[1] !== "gms.ndhu.edu.tw") {
           setMessage({
-            ...error,
+            isError: true,
             msg:
               language === "English"
                 ? loginTranslations[9].english
@@ -177,7 +179,7 @@ const Signup = () => {
           })
           .then((res) => {
             if (res.data.status === "FAILED")
-              setMessage({ msg: res.data.message, classname: null });
+              setMessage({ msg: res.data.message, isError: true });
             // If success then set the authState to logged in
             if (res.data.status === "SUCCESS") {
               setAuthState({

@@ -747,6 +747,9 @@ button:hover {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+#signup .green {
+  color: var(--green);
+}
 #signup .or {
   width: 85%;
   text-transform: uppercase;
@@ -837,6 +840,9 @@ button:hover {
   }
   #signup .create-account {
     flex: 60%;
+  }
+  #signup .create-account .header {
+    margin-bottom: 20px;
   }
 }
 /* End of Media Query Signup Page */
