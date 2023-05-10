@@ -1657,8 +1657,8 @@ button:hover {
     right: 55%;
     top: 0;
     min-height: unset;
-    height: auto;
-    width: auto;
+    height: 650px;
+    width: 385px;
     background-color: var(--white);
     z-index: 10;
   }
