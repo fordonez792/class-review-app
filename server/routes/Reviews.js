@@ -292,7 +292,7 @@ router.delete("/delete/:id/:courseId", authenticateToken, async (req, res) => {
     include: HelpfulVotes,
   });
 
-  if (review.creator !== userClicked.id || !userClicked.admin) {
+  if (review.creator !== userClicked.id && !userClicked.admin) {
     res.json({
       status: "FAILED",
       message: "You are not allowed to delete this review",

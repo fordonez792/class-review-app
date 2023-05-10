@@ -91,7 +91,10 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
   // The option to delete the review but only if the one that clicked the option is the owner of the review
   const deleteReviewMutation = useMutation({
     mutationFn: deleteReview,
-    onSuccess: () => refetch(),
+    onSuccess: (data) => {
+      console.log(data);
+      refetch();
+    },
     onError: (error) => console.log(error),
   });
 
