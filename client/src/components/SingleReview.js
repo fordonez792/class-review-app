@@ -91,10 +91,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
   // The option to delete the review but only if the one that clicked the option is the owner of the review
   const deleteReviewMutation = useMutation({
     mutationFn: deleteReview,
-    onSuccess: (data) => {
-      console.log(data);
-      refetch();
-    },
+    onSuccess: () => refetch(),
     onError: (error) => console.log(error),
   });
 
@@ -276,7 +273,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
           </p>
         )}
         {window.location.pathname === "/account" && (
-          <p className="link">
+          <p className="link" onClick={() => navigateCourse()}>
             {language === "English"
               ? Course.courseEnglishName
               : language === "Chinese" && Course.courseName}
