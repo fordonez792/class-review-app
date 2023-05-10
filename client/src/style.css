@@ -1453,7 +1453,7 @@ button:hover {
   }
   #search .container {
     min-height: 0;
-    z-index: 10;
+    z-index: 12;
     border-radius: 3px;
   }
   #search .container .searchbar {
@@ -1592,7 +1592,7 @@ button:hover {
     transform: unset;
     opacity: 0;
     pointer-events: none;
-    z-index: 7;
+    z-index: 12;
   }
   #side-menu.side-menu2 {
     transition: 0s ease transform;
@@ -1629,6 +1629,7 @@ button:hover {
     top: 10%;
     min-height: unset;
     background-color: transparent;
+    z-index: 12;
   }
   #side-menu.side-menu2 {
     height: 650px;
@@ -1660,7 +1661,7 @@ button:hover {
     height: 650px;
     width: 385px;
     background-color: var(--white);
-    z-index: 10;
+    z-index: 12;
   }
   #side-menu.side-menu2 .overlay {
     display: none;
@@ -3140,7 +3141,7 @@ button:hover {
 }
 #criteria-modal .container {
   position: relative;
-  z-index: 8;
+  z-index: 12;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: var(--white);
 }
@@ -3325,6 +3326,9 @@ button:hover {
   background-color: var(--white);
   border-bottom: 2px solid var(--dark-gray);
   transition: 0.8s ease max-height;
+}
+#course .reviews-container {
+  overflow-y: scroll !important;
 }
 #course .ratings .button,
 #course .course-info .button {
@@ -3884,6 +3888,7 @@ button:hover {
   height: auto;
   width: 100%;
   margin-top: 10px;
+  overflow: hidden;
   background-color: var(--white);
 }
 #single-review:last-child {
@@ -4191,14 +4196,16 @@ button:hover {
 }
 #confirm-delete-modal .container {
   position: relative;
-  height: 375px;
+  min-height: unset !important;
+  height: 100%;
   width: 400px;
   left: 50%;
   transform: translateX(-50%);
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 12;
+  z-index: 13 !important;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: var(--white) !important;
 }
@@ -4214,12 +4221,12 @@ button:hover {
   color: var(--red);
 }
 #confirm-delete-modal .container .icon {
-  font-size: 5rem;
+  font-size: 4rem;
   color: var(--red);
 }
 #confirm-delete-modal .container .header {
   padding: 0 !important;
-  margin-top: 25px !important;
+  margin-top: 1rem !important;
 }
 #confirm-delete-modal .container p {
   width: 80%;
@@ -4230,7 +4237,7 @@ button:hover {
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
-  margin-top: 25px;
+  margin-top: 1rem;
 }
 #confirm-delete-modal .container .btn-container button {
   width: 120px;
