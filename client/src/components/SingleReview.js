@@ -238,10 +238,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
                 {(authState.username === username || authState.admin) && (
                   <li
                     className="option delete"
-                    onClick={
-                      () => setIsConfirmDeleteOpen(true)
-                      // deleteReviewMutation.mutate({ id, courseId })
-                    }
+                    onClick={() => setIsConfirmDeleteOpen(true)}
                   >
                     <FaTrash />
                     {language === "English"
@@ -321,7 +318,7 @@ const SingleReview = ({ review, debouncedValue, position, index, refetch }) => {
         </article>
         <article className="footer">
           <span onClick={() => helpfulVoteMutation.mutate({ id })}>
-            {HelpfulVotes.some((item) => item.UserId === User.id) ? (
+            {HelpfulVotes.some((item) => item.UserId === authState.id) ? (
               <FaThumbsUp />
             ) : (
               <FaRegThumbsUp />
