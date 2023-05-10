@@ -26,7 +26,11 @@ const Filter = ({
   // Refetch the data according to the filters selected
   const applyFilters = () => {
     refetch();
-    setSelectedFilters({ ...tempFilters, saved: true });
+    setSelectedFilters({
+      ...tempFilters,
+      courseId: selectedFilters.courseId,
+      saved: true,
+    });
     setIsFilterOpen(false);
   };
 
