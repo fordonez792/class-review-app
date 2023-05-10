@@ -81,6 +81,11 @@ const SearchResults = () => {
     { enabled: !!collegeId }
   );
 
+  // Updates departmentId if it has changed due to sidemenu selections
+  useEffect(() => {
+    setSelectedFilters({ ...selectedFilters, departmentId });
+  }, [departmentId]);
+
   // Once a related department is clicked a new search for that department is done, and results are shown in the page immediately, also scroll to the left
   const handleSetParams = (e) => {
     displayDepartmentsRef.current.scroll({ left: 0, behavior: "smooth" });
