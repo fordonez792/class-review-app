@@ -4040,12 +4040,6 @@ button:hover {
   cursor: pointer;
   transition: 0.3s ease background-color;
 }
-#single-review .user-info .options ul li:hover {
-  background-color: var(--dark-gray);
-}
-#single-review .user-info .options ul li.reported:hover {
-  background-color: var(--light-gray);
-}
 #single-review .user-info .options ul li.reported {
   cursor: default;
 }
@@ -4200,6 +4194,12 @@ button:hover {
   #single-review .user-info .options ul {
     right: 40px;
     top: 50px;
+  }
+  #single-review .user-info .options ul li:hover {
+    background-color: var(--dark-gray);
+  }
+  #single-review .user-info .options ul li.reported:hover {
+    background-color: var(--light-gray);
   }
   #single-review .user-info .options ul li {
     font-size: calc(1rem * 1.1);
