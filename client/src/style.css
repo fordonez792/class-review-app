@@ -841,9 +841,6 @@ button:hover {
   #signup .create-account {
     flex: 60%;
   }
-  #signup .create-account .header {
-    margin-bottom: 20px;
-  }
 }
 /* End of Media Query Signup Page */
 
