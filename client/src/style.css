@@ -2263,8 +2263,6 @@ button:hover {
   top: 1.5rem;
 }
 #filter-modal .close-btn svg {
-  height: 100%;
-  width: 100%;
   font-size: 1.5rem;
   cursor: pointer;
   transition: 0.3s ease color, 0.5s ease transform;
@@ -2553,8 +2551,6 @@ button:hover {
   top: 1.5rem;
 }
 #sort-modal .close-btn svg {
-  height: 100%;
-  width: 100%;
   font-size: 1.5rem;
   cursor: pointer;
   transition: 0.3s ease color, 0.5s ease transform;
