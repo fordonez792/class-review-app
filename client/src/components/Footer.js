@@ -84,7 +84,7 @@ const Footer = () => {
             </p>
             <a
               className="paragraph"
-              href="https://forms.gle/LcYrHyVzKxZ1bc6RA"
+              href="https://forms.gle/cgDVeZ5ZMNc2oypd8"
               target="_blank"
             >
               {language === "English"
