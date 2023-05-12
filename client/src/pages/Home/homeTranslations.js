@@ -4,7 +4,7 @@ export const homeTranslations = [
   {
     id: 1,
     english: "Read authentic student reviews from verified NDHU students",
-    chinese: "閱讀已認證東華學生的評價",
+    chinese: "參考來自全校學生對課程最真實的評論",
   },
   {
     id: 2,
