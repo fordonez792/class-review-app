@@ -67,7 +67,7 @@ router.post("/get-courses", async (req, res) => {
     // Least Difficult Courses means overallDifficulty rating <= 2
     if (rating === "overallLeastDifficult")
       where.overallDifficulty = { [Op.lte]: 2 };
-    // if (rating === "visited") where.visited = {};
+    if (rating === "visited") where.visited = { [Op.gte]: 1 };
   }
   if (await isQueryParam(time)) {
     where.time = { [Op.substring]: time };

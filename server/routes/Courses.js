@@ -341,7 +341,10 @@ router.get("/filter/", async (req, res) => {
       where.overallDifficulty = { [Op.gte]: 4 };
     if (rating === "overallLeastDifficult")
       where.overallDifficulty = { [Op.lte]: 2 };
-    // if (rating === "visited") where.visited = {};
+    if (rating === "visited") {
+      where.visited = { [Op.gte]: 1 };
+      order.push(["visited", "DESC"]);
+    }
   }
 
   Courses.findAll({
