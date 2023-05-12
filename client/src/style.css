@@ -1845,7 +1845,7 @@ button:hover {
 #search-results .related-departments p span {
   font-weight: initial;
   display: inline-block;
-  height: 100%;
+  /* height: 100%; */
   padding: 7px 10px;
   margin: 0 3px;
   background-color: var(--white);
