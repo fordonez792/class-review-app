@@ -67,6 +67,8 @@ const SearchResults = () => {
     saved: false,
   });
 
+  console.log(selectedSort);
+
   // Fetch courses with function defined in coursesApi file, either by departmentID or the search query
   const courses = useQuery(
     ["courses", selectedFilters, selectedSort],

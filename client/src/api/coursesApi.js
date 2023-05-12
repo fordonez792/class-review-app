@@ -17,7 +17,7 @@ export const getDepartments = (collegeId) => {
 };
 
 // Gets courses with the selected filters, default will be just by departmentId
-export const getCourses = (selectedFilters) => {
+export const getCourses = (selectedFilters, sort) => {
   const {
     search,
     departmentId,
@@ -26,9 +26,9 @@ export const getCourses = (selectedFilters) => {
     spring,
     courseLevel,
     time,
-    sort,
     rating,
   } = selectedFilters;
+  console.log(sort);
   return axios
     .get(
       `${

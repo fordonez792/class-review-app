@@ -319,11 +319,11 @@ router.get("/filter/", async (req, res) => {
       order.push(["numberOfReviews", "DESC"]);
     }
     // Highest Rating
-    else if (parseInt(sort) === 3) {
+    else if (parseInt(sort) === 2) {
       order.push(["overallRecommend", "DESC"]);
     }
     // Most Popular
-    else if (parseInt(sort) === 4) {
+    else if (parseInt(sort) === 3) {
       order.push(["visited", "DESC"]);
     }
   } else {
