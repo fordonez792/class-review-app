@@ -43,7 +43,7 @@ const Course = () => {
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
-    courseId: null,
+    courseId: id,
     search: "",
     rating: [],
     year: [],
