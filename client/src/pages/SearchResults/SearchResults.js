@@ -63,7 +63,7 @@ const SearchResults = () => {
       ? [filter]
       : [],
     time: chatbotTime.find((str) => str === filter) ? [filter] : [],
-    rating: null,
+    rating: chatbotRatings.find((str) => str === filter) ? [filter] : [],
     saved: false,
   });
 
