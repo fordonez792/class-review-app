@@ -14,8 +14,8 @@ router.post("/", authenticateToken, async (req, res) => {
   const found = await HelpfulVotes.findOne({
     where: { ReviewId: reviewId, UserId: req.user.id },
   });
-  const user = await Users.findOne({ where: { id: req.user.id } });
   const review = await Reviews.findOne({ where: { id: reviewId } });
+  const user = await Users.findOne({ where: { id: review.creator } });
 
   if (found) {
     HelpfulVotes.destroy({ where: { ReviewId: reviewId, UserId: req.user.id } })
