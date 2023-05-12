@@ -70,10 +70,10 @@ const Course = () => {
   }, [debouncedValue]);
 
   // correctly set the courseId in the filters
-  // useEffect(() => {
-  //   if (course.data?.id)
-  //     setSelectedFilters({ ...selectedFilters, courseId: course.data?.id });
-  // }, [course.data?.id]);
+  useEffect(() => {
+    if (course.data?.id)
+      setSelectedFilters({ ...selectedFilters, courseId: course.data?.id });
+  }, [course.data?.id]);
 
   // Check if page is being navigated to, if yes then increase the visited
   useEffect(() => {
