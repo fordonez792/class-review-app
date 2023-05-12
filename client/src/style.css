@@ -5387,11 +5387,11 @@ button:hover {
     object-fit: fill;
   }
   #home .container .picture p {
-    width: 80%;
+    width: 70%;
     font-size: 3.5rem;
   }
   #home .container .picture p.chinese {
-    width: 40%;
+    width: 50%;
   }
   #home .container .recent-reviews {
     width: 80%;
