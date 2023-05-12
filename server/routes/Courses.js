@@ -259,6 +259,15 @@ router.get("/filter/", async (req, res) => {
   if (id == null && (search == null || search.length === 0)) return;
 
   // Check parameters to see if they are null or empty
+  if (await isQueryParam(search)) {
+    where = {
+      [Op.or]: [
+        { courseId: { [Op.substring]: search } },
+        { courseName: { [Op.substring]: search } },
+        { courseEnglishName: { [Op.substring]: search } },
+      ],
+    };
+  }
   if (await isQueryParam(id)) {
     if (id.toString().length === 7) {
       departmentId = parseInt(id.toString().slice(3));
@@ -268,15 +277,6 @@ router.get("/filter/", async (req, res) => {
       departmentId = id;
       where.departmentId = departmentId;
     }
-  }
-  if (await isQueryParam(search)) {
-    where = {
-      [Op.or]: [
-        { courseId: { [Op.substring]: search } },
-        { courseName: { [Op.substring]: search } },
-        { courseEnglishName: { [Op.substring]: search } },
-      ],
-    };
   }
   if (await isQueryParam(taughtInEnglish)) {
     // query returns strings instead of booleans so need to check and adjust

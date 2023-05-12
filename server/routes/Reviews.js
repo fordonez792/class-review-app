@@ -166,9 +166,6 @@ router.get("/filter/", async (req, res) => {
   let where = {};
   let order = [];
 
-  if (await isQueryParam(courseId)) {
-    where.courseId = courseId;
-  }
   if (await isQueryParam(search)) {
     where = {
       [Op.or]: [
@@ -176,6 +173,9 @@ router.get("/filter/", async (req, res) => {
         { title: { [Op.substring]: search } },
       ],
     };
+  }
+  if (await isQueryParam(courseId)) {
+    where.courseId = courseId;
   }
   if ((await isQueryParam(fall)) || (await isQueryParam(spring))) {
     const array = [];

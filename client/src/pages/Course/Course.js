@@ -43,7 +43,7 @@ const Course = () => {
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
-    courseId: id,
+    courseId: null,
     search: "",
     rating: [],
     year: [],
@@ -63,6 +63,8 @@ const Course = () => {
       enabled: !!course?.data?.id,
     }
   );
+
+  console.log(selectedFilters);
 
   // Set the search to be the debounced value to get the posts with keyword
   useEffect(() => {
