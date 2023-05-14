@@ -144,6 +144,7 @@ const Search = ({
                       courseId,
                       courseName,
                       courseEnglishName,
+                      taughtInEnglish,
                       Department,
                     } = course;
                     const { departmentEnglishName, departmentName } =
@@ -154,7 +155,16 @@ const Search = ({
                           {language === "English"
                             ? courseEnglishName
                             : language === "Chinese" && courseName}{" "}
-                          - {courseId}
+                          - {courseId}{" "}
+                          {taughtInEnglish
+                            ? language === "English"
+                              ? searchTranslations[4].english
+                              : language === "Chinese" &&
+                                searchTranslations[4].chinese
+                            : language === "English"
+                            ? searchTranslations[5].english
+                            : language === "Chinese" &&
+                              searchTranslations[5].chinese}
                         </span>
                         <span>
                           {language === "English"
@@ -192,6 +202,7 @@ const Search = ({
                     courseId,
                     courseName,
                     courseEnglishName,
+                    taughtInEnglish,
                     Department,
                   } = course;
                   const { departmentEnglishName, departmentName } = Department;
@@ -201,7 +212,16 @@ const Search = ({
                         {language === "English"
                           ? courseEnglishName
                           : language === "Chinese" && courseName}{" "}
-                        - {courseId}
+                        - {courseId}{" "}
+                        {taughtInEnglish
+                          ? language === "English"
+                            ? searchTranslations[4].english
+                            : language === "Chinese" &&
+                              searchTranslations[4].chinese
+                          : language === "English"
+                          ? searchTranslations[5].english
+                          : language === "Chinese" &&
+                            searchTranslations[5].chinese}
                       </span>
                       <span>
                         {language === "English"

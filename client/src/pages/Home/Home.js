@@ -143,6 +143,7 @@ const Home = () => {
                   numberOfReviews,
                   teacher,
                   time,
+                  taughtInEnglish,
                   Department,
                 } = course;
                 const { departmentEnglishName, departmentName } = Department;
@@ -160,7 +161,16 @@ const Home = () => {
                         {language === "English"
                           ? courseEnglishName
                           : language === "Chinese" && courseName}{" "}
-                        - {courseId}
+                        - {courseId}{" "}
+                        {taughtInEnglish
+                          ? language === "English"
+                            ? searchTranslations[4].english
+                            : language === "Chinese" &&
+                              searchTranslations[4].chinese
+                          : language === "English"
+                          ? searchTranslations[5].english
+                          : language === "Chinese" &&
+                            searchTranslations[5].chinese}
                       </span>
                       <span>
                         {language === "English"
@@ -180,6 +190,7 @@ const Home = () => {
                       numberOfReviews={numberOfReviews}
                       teacher={teacher}
                       time={time}
+                      taughtInEnglish={taughtInEnglish}
                     />
                   );
                 }

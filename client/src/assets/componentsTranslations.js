@@ -96,6 +96,16 @@ export const searchTranslations = [
     english: "Most Popular Courses",
     chinese: "熱門課程",
   },
+  {
+    id: 5,
+    english: "(English)",
+    chinese: "(英文)",
+  },
+  {
+    id: 6,
+    english: "(Chinese)",
+    chinese: "(中文)",
+  },
 ];
 
 export const singleReviewTranslations = [
