@@ -99,7 +99,7 @@ const Sort = ({
     return () => document.removeEventListener("click", closeDropdown);
   }, []);
 
-  useEffect(() => setTempSort({ ...tempSort, departmentId }));
+  useEffect(() => setTempSort({ ...tempSort, departmentId }), [departmentId]);
 
   return (
     <section
