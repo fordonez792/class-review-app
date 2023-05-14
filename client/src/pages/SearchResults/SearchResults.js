@@ -67,8 +67,6 @@ const SearchResults = () => {
     saved: false,
   });
 
-  console.log(selectedSort);
-
   // Fetch courses with function defined in coursesApi file, either by departmentID or the search query
   const courses = useQuery(
     ["courses", selectedFilters, selectedSort],
@@ -340,6 +338,7 @@ const SearchResults = () => {
                         ? "search no-dep"
                         : "search"
                     }
+                    departmentId={departmentId}
                   />
                   <Sort
                     selectedSort={selectedSort}
@@ -352,6 +351,7 @@ const SearchResults = () => {
                     className={
                       departments.status === "success" ? "search dep" : "search"
                     }
+                    departmentId={departmentId}
                   />
                 </>
               )}
@@ -413,6 +413,7 @@ const SearchResults = () => {
             setIsFilterOpen={setIsFilterOpen}
             refetch={courses.refetch}
             setPageNumber={setPageNumber}
+            departmentId={departmentId}
           />
           <Sort
             selectedSort={selectedSort}
@@ -421,6 +422,7 @@ const SearchResults = () => {
             setIsSortOpen={setIsSortOpen}
             refetch={courses.refetch}
             setPageNumber={setPageNumber}
+            departmentId={departmentId}
           />
         </>
       )}

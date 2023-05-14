@@ -19,6 +19,7 @@ const Filter = ({
   refetch,
   setPageNumber,
   className,
+  departmentId,
 }) => {
   const { language } = useLanguageContext();
   const { isDesktop } = useScreenSizeContext();
@@ -45,6 +46,9 @@ const Filter = ({
     }
     setIsFilterOpen(false);
   };
+
+  console.log("selected", selectedFilters);
+  console.log("temp", tempFilters);
 
   // Handles opening and closing of a single filter, only on desktop
   const openClose = (e) => {
@@ -130,6 +134,8 @@ const Filter = ({
   useEffect(() => {
     if (isDesktop) applyFilters();
   }, [tempFilters]);
+
+  useEffect(() => setTempFilters({ ...tempFilters, departmentId }));
 
   return (
     <section

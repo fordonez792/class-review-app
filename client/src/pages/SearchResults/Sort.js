@@ -19,6 +19,7 @@ const Sort = ({
   setSelectedSort,
   setPageNumber,
   className,
+  departmentId,
 }) => {
   const { language } = useLanguageContext();
   const { isDesktop } = useScreenSizeContext();
@@ -97,6 +98,8 @@ const Sort = ({
 
     return () => document.removeEventListener("click", closeDropdown);
   }, []);
+
+  useEffect(() => setTempSort({ ...tempSort, departmentId }));
 
   return (
     <section

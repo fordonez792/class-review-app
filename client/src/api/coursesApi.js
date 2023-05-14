@@ -28,7 +28,6 @@ export const getCourses = (selectedFilters, sort) => {
     time,
     rating,
   } = selectedFilters;
-  console.log(sort);
   return axios
     .get(
       `${
