@@ -95,6 +95,7 @@ const SearchResults = () => {
       departmentId: e.target.id,
       filter,
     });
+    setSelectedSort({ ...selectedSort, sort: 0 });
     setSelectedFilters({ ...selectedFilters, departmentId: e.target.id });
   };
 
