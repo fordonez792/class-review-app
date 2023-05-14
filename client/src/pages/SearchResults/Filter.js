@@ -47,9 +47,6 @@ const Filter = ({
     setIsFilterOpen(false);
   };
 
-  console.log("selected", selectedFilters);
-  console.log("temp", tempFilters);
-
   // Handles opening and closing of a single filter, only on desktop
   const openClose = (e) => {
     if (!e.target.classList.contains("open-close-btn")) return;
@@ -135,7 +132,10 @@ const Filter = ({
     if (isDesktop) applyFilters();
   }, [tempFilters]);
 
-  useEffect(() => setTempFilters({ ...tempFilters, departmentId }));
+  useEffect(
+    () => setTempFilters({ ...tempFilters, departmentId }),
+    [departmentId]
+  );
 
   return (
     <section
