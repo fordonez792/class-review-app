@@ -15,6 +15,7 @@ import Course from "./pages/Course/Course";
 import Account from "./pages/Account/Account";
 import Admin from "./pages/Admin/Admin";
 
+import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute";
 import ProtectedRouteAdmin from "./ProtectedRoutes/ProtectedRouteAdmin";
 
@@ -29,6 +30,7 @@ const App = () => {
 
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route element={<Navbar />}>
           <Route path="/" element={<Home />} />
