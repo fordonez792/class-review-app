@@ -18,6 +18,7 @@ import robotPic from "../../assets/robot_pic.jpg";
 import homePic from "../../assets/home_pic.jpg";
 import { images } from "../../assets/images";
 import { homeTranslations } from "./homeTranslations";
+import { searchTranslations } from "../../assets/componentsTranslations";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { useSearchContext } from "../../context/SearchContext";
 import { useScreenSizeContext } from "../../context/ScreenSizeContext";
