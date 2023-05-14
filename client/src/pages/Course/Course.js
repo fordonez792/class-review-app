@@ -64,8 +64,6 @@ const Course = () => {
     }
   );
 
-  console.log(selectedFilters);
-
   // Set the search to be the debounced value to get the posts with keyword
   useEffect(() => {
     setSelectedFilters({ ...selectedFilters, search: debouncedValue });
