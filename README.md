@@ -11,7 +11,7 @@ Graduation Project for my computer science and information engineering degree. W
 - Firebase, Firebase Authentication
 - Dialog Flow for the creation of the chatbot
 - Node JS and Express JS for the back end
-- Json Web Tokens for a safe login
+- JSON Web Tokens for a safe login
 - Sequelize to serve as the ORM for MySQL
 - MySQL as the main database
 - Full Chinese and full English website versions
